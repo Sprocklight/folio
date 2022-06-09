@@ -979,7 +979,7 @@ font-weight: 400;
 			}
 
 			ul.icons li .icon {
-				color: #898481;
+				color: #242424;
 			}
 
 				ul.icons li .icon:before {
@@ -1541,7 +1541,7 @@ font-weight: 500;
 					}
 
 						#header nav > ul > li a.icon:before {
-							color: #000000;
+							color: #898481;
 							float: right;
 							margin-left: 0.75em;
 						}
