@@ -1,163 +1,168 @@
-<!DOCTYPE HTML>
-<!--
-	Sprocklight - Portfolio+, by Sprocklight Digital Marketing Services
--->
-<html>
-	<head>
-		<meta property="og:image" content="images/socialshare.jpg">
-<meta property="og:image:type" content="image/jpg">
-<meta property="og:image:width" content="1024">
-<meta property="og:image:height" content="512">
-		
-		<title>Portfolio+ by Sprocklight</title>
-<link rel="icon" type="images/favicon.jpg" href="images/favicon.jpg"/>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portfolio+ by Sprocklight</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.4;
+    }
+    header {
+      padding: 3rem 5%;
+      text-align: center;
+      border-bottom: 1px solid #222;
+    }
+    h1 {
+      font-size: 4rem;
+      margin: 0;
+      letter-spacing: -2px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      padding: 3rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #111;
+      transition: transform .3s ease, box-shadow .3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0,255,255,0.1);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.9;
+      transition: opacity .3s;
+    }
+    .card:hover img { opacity: 1; }
+    .info {
+      padding: 1.5rem;
+    }
+    .title { font-size: 1.4rem; margin: 0; }
+    .tag { font-size: 0.9rem; color: #0ff; opacity: 0.7; }
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.95);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity .4s;
+    }
+    .modal.show { opacity: 1; }
+    .modal-content {
+      max-width: 90%;
+      max-height: 90vh;
+      background: #111;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 60px rgba(0,255,255,0.2);
+    }
+    .close {
+      position: absolute;
+      top: 1rem; right: 1.5rem;
+      font-size: 2rem;
+      color: #0ff;
+      cursor: pointer;
+    }
+    .hero { width: 100%; height: auto; }
+    .details { padding: 2rem; }
+  </style>
+</head>
+<body>
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="index"><strong>Portfolio+ </strong> by Sprocklight</a></h1>
-						<nav>
-							<ul>
-								<li><a href="https://sprocklight.github.io/home/" class="icon solid fa-user-astronaut">HOME</a></li>
-								<li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
-							</ul>
-						</nav>
-					</header>
+  <header>
+    <h1>Portfolio+</h1>
+    <p style="opacity:0.6; margin-top:0.5rem;">Sprocklight — Design & Dev</p>
+  </header>
 
-				<!-- Main -->
-					<div id="main">
+  <div class="grid">
+    <!-- Card 1 -->
+    <div class="card" onclick="openModal('skin-cartel')">
+      <img src="https://via.placeholder.com/600x400/111/0ff?text=SkinCartel" alt="SkinCartel">
+      <div class="info">
+        <h2 class="title">SkinCartel</h2>
+        <p class="tag">Streetwear Rebrand • 2025</p>
+      </div>
+    </div>
 
-						<article class="thumb">
-							<a href="images/fulls/01.jpg" class="image"><img src="images/thumbs/01.jpg" alt="" /></a>
-							<h2>Website Banner for WKNDR</h2>
-</article>
-							<article class="thumb">
-							<a href="images/fulls/07.gif" class="image"><img src="images/thumbs/07.gif" alt="" /></a>
-							<h2>Animated Banner for SkinCartel</h2>
+    <!-- Card 2 -->
+    <div class="card" onclick="openModal('neon-vibes')">
+      <img src="https://via.placeholder.com/600x450/111/0ff?text=Neon+Vibes" alt="Neon Vibes">
+      <div class="info">
+        <h2 class="title">Neon Vibes</h2>
+        <p class="tag">UI Concept • 3D Motion</p>
+      </div>
+    </div>
 
-									
-						
-						</article>
-						<article class="thumb">
-							<a href="images/fulls/02.jpg" class="image"><img src="images/thumbs/02.jpg" alt="" /></a>
-							<h2>Photoshoot for Turbine Torcher</h2>
-							<p>Photoshoot for Turbine Torcher - Website Banner</p>
-						</article>
-						<article class="thumb">
-							<a href="images/fulls/03.jpg" class="image"><img src="images/thumbs/03.jpg" alt="" /></a>
-							<h2>Jaunter Airpods Collection</h2>
-							<p>Layout + Digital Edits for Presentation and Brochure</p>
-						</article>
-						<article class="thumb">
-							<a href="images/fulls/04.jpg" class="image"><img src="images/thumbs/04.jpg" alt="" /></a>
-							<h2>Website Banner for SkinCartel</h2>
-							<p>Banner for Product and Website Page Use</p>
-						</article>
-<article class="thumb">
-							<a href="images/fulls/10.jpg" class="image"><img src="images/thumbs/10.jpg" alt="" /></a>
-							<h2>The Emerald Events Place Website</h2>
-							<p>SEO + Design + Host Migration</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt="" /></a>
-							<h2>Promotion - Chef Maria's Catering</h2>
-							<p>Facebook Promotion x AD</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/08.gif" class="image"><img src="images/thumbs/08.gif" alt="" /></a>
-							<h2>JN Leather Case Collection</h2>
-												</article>
-						<article class="thumb">
-							<a href="images/fulls/09.jpg" class="image"><img src="images/thumbs/09.jpg" alt="" /></a>
-							<h2>Jaunter V1 Website</h2>
-													</article>
-						<article class="thumb">
-							<a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt="" /></a>
-							<h2>Pinterest Ad - JHome</h2>
-							<p>Pinterest Ad - Portrait for Jaunter Home</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/00.jpg" class="image"><img src="images/thumbs/00.jpg" alt="" /></a>
-							<h2>Koffee Kart Company Profile</h2>
-							<p>Official Company Profile - Layout / Logos + Vectors / Content</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/13.gif" class="image"><img src="images/thumbs/13.gif" alt="" /></a>
-							<h2>Jaunter V3 Socmed Campaign</h2>
-							<p>Lighting Campaign - Jaunter Q3</p>
-						</article>
-						
-							
-											</div>
+    <!-- Add more cards like this... -->
+  </div>
 
-				<!-- Footer -->
-					<footer id="footer" class="panel">
-						<div class="inner split">
-							<div>
-								<section>
-									<h2>About Sprocklight</h2>
-									<p>Established in 2018, Sprocklight specializes in creating website design and layout for both Wordpress and Shopify 
-									which communicates ideas that inspire, inform, and captivate consumers. We cater to most industries have dedicated experts for graphics,
-									 video editing, and branding, depending on the client's needs.</p>
-								</section>
-								<section>
-									<h2>Social</h2>
-									<ul class="icons">
-										<li><a href="https://www.facebook.com/pudsjuco/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="https://www.instagram.com/junjuco/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="https://www.linkedin.com/in/anthonyjucojr/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-									</ul>
-								</section>
-								<p class="copyright">
-									<strong>&copy; Portfolio+ <a href="https://sprocklight.github.io/home/">Sprocklight Digital</a>.
-								</strong></p>
-							</div>
-							<div>
-								<section>
-									<h2>Get in touch</h2>
-									<form method="post" action="mailto:anthony.juco@gmail.com">
-										<div class="fields">
-											<div class="field half">
-												<input type="text" name="name" id="name" placeholder="Name" />
-											</div>
-											<div class="field half">
-												<input type="text" name="email" id="email" placeholder="Email" />
-											</div>
-											<div class="field">
-												<textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-							</div>
-						</div>
-					</footer>
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">×</span>
+      <img class="hero" id="modalImg" src="" alt="Project">
+      <div class="details" id="modalDetails">
+        <h2 id="modalTitle"></h2>
+        <p id="modalDesc">Loading...</p>
+      </div>
+    </div>
+  </div>
 
-			</div>
+  <script>
+    const projects = {
+      'skin-cartel': {
+        img: 'https://via.placeholder.com/1200x800/111/0ff?text=SkinCartel+Hero',
+        title: 'SkinCartel',
+        desc: 'Rebranded a Gen-Z streetwear line—bold typography, electric cyan accents, and a custom typeface. Built in Figma, prototyped in Framer. Took three weeks.'
+      },
+      'neon-vibes': {
+        img: 'https://via.placeholder.com/1200x900/111/0ff?text=Neon+Vibes+Hero',
+        title: 'Neon Vibes',
+        desc: 'Experimental UI with 3D glassmorphism and scroll-triggered animations. All motion done in After Effects + Lottie. Client loved the glow.'
+      }
+      // Add your real projects here
+    };
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+    function openModal(id) {
+      const data = projects ;
+      document.getElementById('modalImg').src = data.img;
+      document.getElementById('modalTitle').textContent = data.title;
+      document.getElementById('modalDesc').textContent = data.desc;
+      document.getElementById('modal').classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
 
-	</body>
+    function closeModal() {
+      document.getElementById('modal').classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Close on outside click
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('modal')) closeModal();
+    });
+  </script>
+</body>
 </html>
