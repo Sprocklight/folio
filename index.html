@@ -14,8 +14,7 @@
             --bg-color: #ffffff; 
             --text-main: #001A70;
             --text-body: #2d3436;
-            --line-color: #f2f2f2; /* Ultra-faint grid lines */
-            /* Grayish Floating Tint */
+            --line-color: #f2f2f2; 
             --header-bg: rgba(242, 242, 245, 0.9); 
             --glass-blur: blur(20px) saturate(140%);
         }
@@ -26,9 +25,11 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-main);
-            overflow-x: hidden;
+            overflow-x: hidden; /* HARD FIX: Prevents any horizontal wobble globally */
         }
 
+        /* HARD FIX: Hide home header completely when modal is open to prevent bleed-through */
+        body.modal-open #header { display: none !important; }
         body.modal-open { overflow: hidden; }
 
         /* --- Grayish Floating Header --- */
@@ -40,16 +41,12 @@
             width: 96%;
             z-index: 1000;
             padding: 1.1rem 2.5rem;
-            
             background: var(--header-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
-            
-            /* The "Float" Definition */
             border-radius: 8px;
             border: 1px solid rgba(0, 0, 0, 0.03);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -67,7 +64,7 @@
             font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; letter-spacing: 1.5px;
         }
 
-        /* --- Modal Header (Unified Pill) --- */
+        /* --- Modal Header --- */
         .modal-header {
             position: fixed;
             top: 25px;
@@ -75,7 +72,7 @@
             transform: translateX(-50%);
             width: 90%;
             max-width: 1000px;
-            z-index: 1010;
+            z-index: 10005; /* Pushed extremely high */
             padding: 0.9rem 2.2rem;
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: var(--glass-blur);
@@ -100,23 +97,19 @@
         .close-trigger::before { transform: rotate(45deg); }
         .close-trigger::after { transform: rotate(-45deg); }
 
-        /* --- Grid Layout (Seamless Fix) --- */
+        /* --- Grid Layout --- */
         #main {
-            padding-top: 100px; /* Space for the floating header */
+            padding-top: 100px; 
             display: grid; 
             grid-template-columns: repeat(4, 1fr);
-            background: #ffffff; /* Pure white seamless background */
+            background: #ffffff; 
             gap: 1px; 
             border-top: 1px solid var(--line-color);
         }
 
         .thumb { 
-            background: #fff; 
-            padding: 4.5rem 2rem; 
-            cursor: pointer; 
-            transition: 0.4s; 
-            border-bottom: 1px solid var(--line-color);
-            border-right: 1px solid var(--line-color);
+            background: #fff; padding: 4.5rem 2rem; cursor: pointer; transition: 0.4s; 
+            border-bottom: 1px solid var(--line-color); border-right: 1px solid var(--line-color);
         }
         .thumb:hover { background: #fafafa; }
 
@@ -127,10 +120,13 @@
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
         .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- Modal Design (Burkhalter Logic) --- */
+        /* --- Modal Layout --- */
         #modal-overlay {
-            position: fixed; inset: 0; z-index: 1001; background: #fff;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 9999; /* Force it above everything else */
+            background: #fff;
             display: none; flex-direction: column; overflow-y: auto;
+            -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
         }
 
         .modal-hero-container { width: 100%; height: 80vh; background: #f8f8f8; position: relative; }
@@ -146,31 +142,42 @@
         .meta-label { font-size: 0.55rem; font-weight: 800; color: #ccc; text-transform: uppercase; margin-bottom: 8px; }
         .meta-value { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
 
-        /* Correct Project Title Rendering */
         .modal-desc-wrap h2 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: clamp(3rem, 7.5vw, 6rem); 
+            font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7.5vw, 6rem); 
             font-weight: 400; line-height: 0.85; color: var(--text-main); letter-spacing: -3px; margin-bottom: 2.5rem;
         }
-
         .modal-desc-wrap p { font-size: 1.4rem; line-height: 1.5; color: var(--text-body); max-width: 820px; font-weight: 400; }
 
-        /* --- Footer --- */
+        /* --- Footer & Contact Links --- */
         #footer { padding: 8rem 5%; background: var(--text-main); color: #fff; }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; }
         .footer-grid h2 { font-family: 'Cormorant Garamond', serif; font-size: 4rem; line-height: 0.9; }
 
-        input, textarea {
-            width: 100%; background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 1.2rem 0; color: #fff; font-family: inherit; margin-bottom: 1.5rem; outline: none;
+        /* Dynamic styling for the contact info */
+        .contact-link {
+            color: #fff; text-decoration: none; font-size: 1.5rem; font-weight: 400; 
+            margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.2); 
+            padding-bottom: 0.5rem; width: fit-content; transition: 0.3s;
+            display: inline-block;
         }
+        .contact-link:hover { border-bottom-color: #fff; }
 
+        /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
             #header { padding: 1rem 1.5rem; }
             #main { grid-template-columns: 1fr; padding-top: 90px; }
             .thumb { padding: 3rem 1.5rem; }
             .modal-header { width: 92%; }
             .modal-desc-wrap h2 { font-size: 3.2rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 3rem; }
+            
+            /* HARD FIX: Mobile Contact Links */
+            .contact-link {
+                font-size: 1.1rem; /* Smaller font on phones */
+                word-wrap: break-word; /* Prevents long emails from breaking the layout */
+                word-break: break-all;
+                max-width: 100%;
+            }
         }
     </style>
 </head>
@@ -265,22 +272,17 @@
                 </p>
             </div>
             <div style="display: flex; flex-direction: column; justify-content: center;">
-                <p style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: #888; margin-bottom: 1rem;">
+                <p style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.5); margin-bottom: 1rem;">
                     Start a Conversation
                 </p>
-                <a href="mailto:anthony.juco@gmail.com" style="color: #fff; text-decoration: none; font-size: 1.5rem; font-weight: 400; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem; width: fit-content; transition: 0.3s;">
-                    anthony.juco@gmail.com
-                </a>
-                <a href="https://www.linkedin.com/company/sprocklightmnl/" target="_blank" style="color: #fff; text-decoration: none; font-size: 1.5rem; font-weight: 400; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 0.5rem; width: fit-content; transition: 0.3s;">
-                    LinkedIn
-                </a>
+                <a href="mailto:anthony.juco@gmail.com" class="contact-link">anthony.juco@gmail.com</a>
+                <a href="https://www.linkedin.com/company/sprocklightmnl/" target="_blank" class="contact-link">LinkedIn</a>
             </div>
         </div>
     </footer>
 
     <script>
         function openProject(title, category, img, text, dim, year) {
-            // Updating Modal Content correctly
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-cat').innerText = category;
             document.getElementById('modal-img').src = img;
@@ -288,7 +290,6 @@
             document.getElementById('modal-dim').innerText = dim;
             document.getElementById('modal-year').innerText = year;
             
-            // Interaction logic
             document.getElementById('modal-overlay').style.display = 'flex';
             document.body.classList.add('modal-open');
             document.getElementById('modal-overlay').scrollTop = 0;
@@ -301,5 +302,3 @@
     </script>
 </body>
 </html>
-
-
