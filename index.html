@@ -32,12 +32,12 @@
         #header {
             position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 4%;
             background: rgba(244, 247, 249, 0.7); backdrop-filter: blur(20px);
-            display: flex; justify-content: space-between; align-items: center; /* Vertical Center */
+            display: flex; justify-content: space-between; align-items: center; 
             border-bottom: 1px solid var(--line-color);
         }
 
         #header h1 {
-            margin: 0; padding: 0; line-height: 1; /* Removes default invisible spacing */
+            margin: 0; padding: 0; line-height: 1; 
             display: flex; align-items: center;
         }
 
@@ -124,10 +124,19 @@
             padding: 1rem 0; color: #fff; font-family: inherit; margin-bottom: 1rem;
         }
 
-        /* --- Mobile Optimization --- */
+        /* --- Mobile Optimization (Dribbble Layout) --- */
         @media (max-width: 1100px) { #main { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             #main { grid-template-columns: 1fr; }
+            
+            /* Dribbble Photo Adjustments */
+            .thumb { padding: 1.5rem 1rem; } /* Reduces white space on sides */
+            .thumb .image-wrap { 
+                aspect-ratio: 4/3; /* Taller, chunkier Dribbble aspect ratio */
+                margin-bottom: 0.8rem; /* Tighter gap between photo and title */
+            }
+            .thumb-info h2 { font-size: 0.75rem; } /* Slightly larger title for readability */
+
             .modal-desc-wrap h2 { font-size: 2.8rem; }
             .modal-hero-container { height: 50vh; }
             .footer-grid { grid-template-columns: 1fr; }
