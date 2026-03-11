@@ -1,164 +1,433 @@
-
 <!DOCTYPE HTML>
 <!--
-	Sprocklight - Portfolio+, by Sprocklight Digital Marketing Services
+Sprocklight - Portfolio+ with Glassmorphism, by Sprocklight Digital Marketing Services
 -->
 <html>
-	<head>
-		<meta property="og:image" content="images/socialshare.jpg">
+<head>
+<meta property="og:image" content="images/socialshare.jpg">
 <meta property="og:image:type" content="image/jpg">
 <meta property="og:image:width" content="1024">
 <meta property="og:image:height" content="512">
-		
-		<title>Portfolio+ by Sprocklight</title>
-<link rel="icon" type="images/favicon.jpg" href="images/favicon.jpg"/>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+<title>Portfolio+ by Sprocklight</title>
+<link rel="icon" type="image/jpg" href="images/favicon.jpg"/>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<style>
+/* Glassmorphism Variables */
+:root {
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    --glass-blur: blur(10px);
+    --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-		<!-- Wrapper -->
-			<div id="wrapper">
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-				<!-- Header -->
-					<header id="header">
-						<h1><a href="index"><strong>Portfolio+ </strong> by Sprocklight</a></h1>
-						<nav>
-							<ul>
-								<li><a href="https://sprocklight.github.io/home/" class="icon solid fa-user-astronaut">HOME</a></li>
-								<li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
-							</ul>
-						</nav>
-					</header>
+body {
+    font-family: 'Arial', sans-serif;
+    background: var(--bg-gradient);
+    color: #fff;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
 
-				<!-- Main -->
-					<div id="main">
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+    transition: all 0.3s ease;
+}
 
-						<article class="thumb">
-							<a href="images/fulls/01.jpg" class="image"><img src="images/thumbs/01.jpg" alt="" /></a>
-							<h2>Website Banner for WKNDR</h2>
+.glass:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+/* Header */
+#header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1rem 5%;
+    backdrop-filter: blur(20px);
+}
+
+#header h1 a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+#header nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+#header nav a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+#header nav a:hover {
+    color: #fff;
+    background: rgba(255,255,255,0.2);
+}
+
+/* Main Content */
+#main {
+    padding: 120px 5% 5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+article.thumb {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+article.thumb .image img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 20px;
+    transition: transform 0.3s ease;
+}
+
+article.thumb:hover .image img {
+    transform: scale(1.02);
+}
+
+article.thumb h2 {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, #fff, rgba(255,255,255,0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+article.thumb p {
+    color: rgba(255,255,255,0.8);
+    margin: 0;
+}
+
+/* Footer */
+#footer {
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(20px);
+    padding: 4rem 5% 2rem;
+    margin-top: 5rem;
+}
+
+#footer .inner.split {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+#footer h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+#footer p {
+    color: rgba(255,255,255,0.9);
+    margin-bottom: 1rem;
+}
+
+#footer ul.icons {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+#footer ul.icons li a {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#footer ul.icons li a:hover {
+    background: rgba(255,255,255,0.3);
+    transform: translateY(-3px);
+}
+
+/* Form */
+#footer form {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border-radius: 20px;
+    padding: 2rem;
+}
+
+.fields {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.field.half {
+    display: inline-grid;
+    width: 48%;
+}
+
+.field input, .field textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: var(--glass-blur);
+    color: #fff;
+    font-size: 1rem;
+}
+
+.field input::placeholder, .field textarea::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.actions input {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1rem;
+}
+
+.actions input:hover {
+    background: rgba(255,255,255,0.2);
+    transform: translateY(-2px);
+}
+
+.actions input.primary {
+    background: linear-gradient(45deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #header nav ul {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    #main {
+        padding: 100px 3% 3rem;
+    }
+    
+    #footer .inner.split {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .field.half {
+        width: 100%;
+    }
+    
+    article.thumb .image img {
+        height: 250px;
+    }
+}
+
+/* Preloader */
+body.is-preload * {
+    opacity: 0;
+    animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+</style>
+</head>
+<body class="is-preload">
+<!-- Wrapper -->
+<div id="wrapper">
+<!-- Header -->
+<header id="header" class="glass">
+<h1><a href="index.html"><strong>Portfolio+ </strong>by Sprocklight</a></h1>
+<nav>
+<ul>
+<li><a href="https://sprocklight.github.io/home/" class="icon solid fa-user-astronaut">HOME</a></li>
+<li><a href="#footer" class="icon solid fa-info-circle">About</a></li>
+</ul>
+</nav>
+</header>
+
+<!-- Main -->
+<div id="main">
+<article class="thumb glass">
+<a href="images/fulls/01.jpg" class="image"><img src="images/thumbs/01.jpg" alt="Website Banner for WKNDR" loading="lazy" /></a>
+<h2>Website Banner for WKNDR</h2>
 </article>
-							<article class="thumb">
-							<a href="images/fulls/07.gif" class="image"><img src="images/thumbs/07.gif" alt="" /></a>
-							<h2>Animated Banner for SkinCartel</h2>
 
-									
-						
-						</article>
-						<article class="thumb">
-							<a href="images/fulls/02.jpg" class="image"><img src="images/thumbs/02.jpg" alt="" /></a>
-							<h2>Photoshoot for Turbine Torcher</h2>
-							<p>Photoshoot for Turbine Torcher - Website Banner</p>
-						</article>
-						<article class="thumb">
-							<a href="images/fulls/03.jpg" class="image"><img src="images/thumbs/03.jpg" alt="" /></a>
-							<h2>Jaunter Airpods Collection</h2>
-							<p>Layout + Digital Edits for Presentation and Brochure</p>
-						</article>
-						<article class="thumb">
-							<a href="images/fulls/04.jpg" class="image"><img src="images/thumbs/04.jpg" alt="" /></a>
-							<h2>Website Banner for SkinCartel</h2>
-							<p>Banner for Product and Website Page Use</p>
-						</article>
-<article class="thumb">
-							<a href="images/fulls/10.jpg" class="image"><img src="images/thumbs/10.jpg" alt="" /></a>
-							<h2>The Emerald Events Place Website</h2>
-							<p>SEO + Design + Host Migration</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt="" /></a>
-							<h2>Promotion - Chef Maria's Catering</h2>
-							<p>Facebook Promotion x AD</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/08.gif" class="image"><img src="images/thumbs/08.gif" alt="" /></a>
-							<h2>JN Leather Case Collection</h2>
-												</article>
-						<article class="thumb">
-							<a href="images/fulls/09.jpg" class="image"><img src="images/thumbs/09.jpg" alt="" /></a>
-							<h2>Jaunter V1 Website</h2>
-													</article>
-						<article class="thumb">
-							<a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt="" /></a>
-							<h2>Pinterest Ad - JHome</h2>
-							<p>Pinterest Ad - Portrait for Jaunter Home</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/00.jpg" class="image"><img src="images/thumbs/00.jpg" alt="" /></a>
-							<h2>Koffee Kart Company Profile</h2>
-							<p>Official Company Profile - Layout / Logos + Vectors / Content</p>
-						</article>
-						
-						<article class="thumb">
-							<a href="images/fulls/13.gif" class="image"><img src="images/thumbs/13.gif" alt="" /></a>
-							<h2>Jaunter V3 Socmed Campaign</h2>
-							<p>Lighting Campaign - Jaunter Q3</p>
-						</article>
-						
-							
-											</div>
+<article class="thumb glass">
+<a href="images/fulls/07.gif" class="image"><img src="images/thumbs/07.gif" alt="Animated Banner for SkinCartel" loading="lazy" /></a>
+<h2>Animated Banner for SkinCartel</h2>
+</article>
 
-				<!-- Footer -->
-					<footer id="footer" class="panel">
-						<div class="inner split">
-							<div>
-								<section>
-									<h2>About Sprocklight</h2>
-									<p>Established in 2018, Sprocklight specializes in creating website design and layout for both Wordpress and Shopify 
-									which communicates ideas that inspire, inform, and captivate consumers. We cater to most industries have dedicated experts for graphics,
-									 video editing, and branding, depending on the client's needs.</p>
-								</section>
-								<section>
-									<h2>Social</h2>
-									<ul class="icons">
-										<li><a href="https://www.facebook.com/pudsjuco/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-										<li><a href="https://www.instagram.com/junjuco/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-										<li><a href="https://www.linkedin.com/in/anthonyjucojr/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-									</ul>
-								</section>
-								<p class="copyright">
-									<strong>&copy; Portfolio+ <a href="https://sprocklight.github.io/home/">Sprocklight Digital</a>.
-								</strong></p>
-							</div>
-							<div>
-								<section>
-									<h2>Get in touch</h2>
-									<form method="post" action="mailto:anthony.juco@gmail.com">
-										<div class="fields">
-											<div class="field half">
-												<input type="text" name="name" id="name" placeholder="Name" />
-											</div>
-											<div class="field half">
-												<input type="text" name="email" id="email" placeholder="Email" />
-											</div>
-											<div class="field">
-												<textarea name="message" id="message" rows="4" placeholder="Message"></textarea>
-											</div>
-										</div>
-										<ul class="actions">
-											<li><input type="submit" value="Send" class="primary" /></li>
-											<li><input type="reset" value="Reset" /></li>
-										</ul>
-									</form>
-								</section>
-							</div>
-						</div>
-					</footer>
+<article class="thumb glass">
+<a href="images/fulls/02.jpg" class="image"><img src="images/thumbs/02.jpg" alt="Photoshoot for Turbine Torcher" loading="lazy" /></a>
+<h2>Photoshoot for Turbine Torcher</h2>
+<p>Photoshoot for Turbine Torcher - Website Banner</p>
+</article>
 
-			</div>
+<article class="thumb glass">
+<a href="images/fulls/03.jpg" class="image"><img src="images/thumbs/03.jpg" alt="Jaunter Airpods Collection" loading="lazy" /></a>
+<h2>Jaunter Airpods Collection</h2>
+<p>Layout + Digital Edits for Presentation and Brochure</p>
+</article>
 
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
+<article class="thumb glass">
+<a href="images/fulls/04.jpg" class="image"><img src="images/thumbs/04.jpg" alt="Website Banner for SkinCartel" loading="lazy" /></a>
+<h2>Website Banner for SkinCartel</h2>
+<p>Banner for Product and Website Page Use</p>
+</article>
 
-	</body>
+<article class="thumb glass">
+<a href="images/fulls/10.jpg" class="image"><img src="images/thumbs/10.jpg" alt="The Emerald Events Place Website" loading="lazy" /></a>
+<h2>The Emerald Events Place Website</h2>
+<p>SEO + Design + Host Migration</p>
+</article>
+
+<article class="thumb glass">
+<a href="images/fulls/06.jpg" class="image"><img src="images/thumbs/06.jpg" alt="Promotion - Chef Maria's Catering" loading="lazy" /></a>
+<h2>Promotion - Chef Maria's Catering</h2>
+<p>Facebook Promotion x AD</p>
+</article>
+
+<article class="thumb glass">
+<a href="images/fulls/08.gif" class="image"><img src="images/thumbs/08.gif" alt="JN Leather Case Collection" loading="lazy" /></a>
+<h2>JN Leather Case Collection</h2>
+</article>
+
+<article class="thumb glass">
+<a href="images/fulls/09.jpg" class="image"><img src="images/thumbs/09.jpg" alt="Jaunter V1 Website" loading="lazy" /></a>
+<h2>Jaunter V1 Website</h2>
+</article>
+
+<article class="thumb glass">
+<a href="images/fulls/05.jpg" class="image"><img src="images/thumbs/05.jpg" alt="Pinterest Ad - JHome" loading="lazy" /></a>
+<h2>Pinterest Ad - JHome</h2>
+<p>Pinterest Ad - Portrait for Jaunter Home</p>
+</article>
+
+<article class="thumb glass">
+<a href="images/fulls/00.jpg" class="image"><img src="images/thumbs/00.jpg" alt="Koffee Kart Company Profile" loading="lazy" /></a>
+<h2>Koffee Kart Company Profile</h2>
+<p>Official Company Profile - Layout / Logos + Vectors / Content</p>
+</article>
+
+<article class="thumb glass">
+<a href="images/fulls/13.gif" class="image"><img src="images/thumbs/13.gif" alt="Jaunter V3 Socmed Campaign" loading="lazy" /></a>
+<h2>Jaunter V3 Socmed Campaign</h2>
+<p>Lighting Campaign - Jaunter Q3</p>
+</article>
+</div>
+
+<!-- Footer -->
+<footer id="footer" class="glass">
+<div class="inner split">
+<div>
+<section>
+<h2>About Sprocklight</h2>
+<p>Established in 2018, Sprocklight specializes in creating website design and layout for both Wordpress and Shopify which communicates ideas that inspire, inform, and captivate consumers. We cater to most industries have dedicated experts for graphics, video editing, and branding, depending on the client's needs.</p>
+</section>
+<section>
+<h2>Social</h2>
+<ul class="icons">
+<li><a href="https://www.facebook.com/pudsjuco/" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+<li><a href="https://www.instagram.com/junjuco/" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+<li><a href="https://www.linkedin.com/in/anthonyjucojr/" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+</ul>
+</section>
+<p class="copyright">
+<strong>&copy; Portfolio+ <a href="https://sprocklight.github.io/home/">Sprocklight Digital</a>.</strong>
+</p>
+</div>
+<div>
+<section>
+<h2>Get in touch</h2>
+<form method="post" action="mailto:anthony.juco@gmail.com">
+<div class="fields">
+<div class="field half">
+<input type="text" name="name" id="name" placeholder="Name" required />
+</div>
+<div class="field half">
+<input type="email" name="email" id="email" placeholder="Email" required />
+</div>
+<div class="field">
+<textarea name="message" id="message" rows="4" placeholder="Message" required></textarea>
+</div>
+</div>
+<ul class="actions">
+<li><input type="submit" value="Send" class="primary" /></li>
+<li><input type="reset" value="Reset" /></li>
+</ul>
+</form>
+</section>
+</div>
+</div>
+</footer>
+</div>
+
+<script>
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+            behavior: 'smooth'
+        });
+    });
+});
+
+// Remove preload class after load
+window.addEventListener('load', () => {
+    document.body.classList.remove('is-preload');
+});
+
+// Form handling
+document.querySelector('form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    window.location.href = 'mailto:anthony.juco@gmail.com';
+});
+</script>
+</body>
 </html>
