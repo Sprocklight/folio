@@ -14,9 +14,8 @@
             --bg-color: #F9F9F9; /* Swiss Off-White */
             --text-main: #000000;
             --text-muted: #666666;
-            --line-color: #E5E5E5;
-            --accent: #000;
-            --grid-gap: 1px; /* Sharp hairline borders between items */
+            --line-color: #E5E5E5; /* Hairline border color */
+            --grid-gap: 1px; 
         }
 
         * {
@@ -33,33 +32,33 @@
 
         body.modal-open { overflow: hidden; }
 
-        /* --- Swiss Minimal Header --- */
+        /* --- Header --- */
         #header {
             position: fixed; top: 0; left: 0; width: 100%;
-            z-index: 100; padding: 2rem 4%;
+            z-index: 100; padding: 1.8rem 4%;
             background: rgba(249,249,249,0.9);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--line-color);
         }
 
         #header h1 a {
             text-decoration: none; color: var(--text-main);
-            font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 2px;
         }
 
         nav ul { list-style: none; display: flex; gap: 3rem; }
         nav a { 
             text-decoration: none; color: var(--text-main); 
-            font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; 
+            font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; 
         }
 
-        /* --- Precision Grid (4 per row) --- */
+        /* --- Rectangular Swiss Grid (4 per row) --- */
         #main {
-            padding: 100px 0 0 0;
+            padding: 85px 0 0 0; /* Aligned to header height */
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            background: var(--line-color); /* This creates the hairline grid lines */
+            background: var(--line-color); 
             gap: var(--grid-gap);
             border-bottom: 1px solid var(--line-color);
         }
@@ -67,24 +66,27 @@
         .thumb {
             background: var(--bg-color);
             cursor: pointer;
-            padding: 40px;
-            transition: background 0.3s ease;
+            padding: 3rem 2rem;
+            transition: background 0.4s ease;
         }
 
-        .thumb:hover { background: #f0f0f0; }
+        .thumb:hover { background: #ffffff; }
 
         .thumb .image-wrap {
-            width: 100%; aspect-ratio: 1/1;
-            overflow: hidden; margin-bottom: 1.5rem;
+            width: 100%; 
+            aspect-ratio: 16/10; /* Returning to Rectangular Dimensions */
+            overflow: hidden; 
+            margin-bottom: 1.5rem;
+            background: #eee;
         }
 
         .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1); }
-        .thumb:hover img { transform: scale(1.05); }
+        .thumb:hover img { transform: scale(1.04); }
 
-        .thumb-info h2 { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
-        .thumb-info p { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; }
+        .thumb-info h2 { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+        .thumb-info p { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        /* --- Full-Screen Swiss Modal --- */
+        /* --- Technical Swiss Modal --- */
         #modal-overlay {
             position: fixed; inset: 0; z-index: 1001;
             background: #fff;
@@ -93,121 +95,145 @@
         }
 
         .modal-header {
-            padding: 2rem 4%; display: flex; justify-content: space-between; align-items: center;
+            padding: 1.5rem 4%; display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--line-color);
+            position: sticky; top: 0; background: #fff; z-index: 10;
         }
 
         .close-modal {
-            background: none; border: 1px solid #000; padding: 8px 20px;
-            font-size: 0.7rem; font-weight: 700; text-transform: uppercase; cursor: pointer;
-            transition: 0.3s;
+            background: none; border: 1px solid #000; padding: 6px 16px;
+            font-size: 0.65rem; font-weight: 700; text-transform: uppercase; cursor: pointer;
         }
-        .close-modal:hover { background: #000; color: #fff; }
 
-        .modal-body { width: 100%; max-width: 1400px; margin: 0 auto; padding: 4rem 4%; }
-        
-        .modal-main-img { width: 100%; height: auto; margin-bottom: 3rem; }
+        .modal-body { width: 100%; max-width: 1300px; margin: 0 auto; padding: 4rem 4%; }
+        .modal-main-img { width: 100%; height: auto; margin-bottom: 4rem; border: 1px solid var(--line-color); }
 
         .modal-meta-container {
             display: grid;
-            grid-template-columns: 1fr 2fr; /* Dribbble/Awwwards layout: Data on left, Text on right */
-            gap: 4rem;
+            grid-template-columns: 1fr 2fr;
+            gap: 5rem;
             align-items: start;
         }
 
+        /* Lower Left Technical Specs */
         .technical-specs {
-            font-size: 0.7rem; font-weight: 600; line-height: 2;
-            text-transform: uppercase; letter-spacing: 1px; color: var(--text-main);
-            border-top: 2px solid #000; padding-top: 1rem;
+            font-size: 0.65rem; font-weight: 700; line-height: 2.2;
+            text-transform: uppercase; letter-spacing: 1.2px; color: var(--text-main);
+            border-top: 3px solid #000; padding-top: 1.5rem;
         }
+        .technical-specs span { display: block; color: var(--text-muted); font-weight: 400; margin-bottom: 2px; }
+        .spec-item { margin-bottom: 1.5rem; }
 
-        .technical-specs span { display: block; color: var(--text-muted); font-weight: 400; margin-bottom: 10px;}
-
-        .modal-desc h2 { font-size: 2.5rem; font-weight: 700; letter-spacing: -1.5px; margin-bottom: 1.5rem; line-height: 1; }
-        .modal-desc p { font-size: 1.1rem; line-height: 1.6; color: #333; max-width: 600px; }
+        .modal-desc h2 { font-size: 2.8rem; font-weight: 700; letter-spacing: -1.8px; margin-bottom: 1.5rem; line-height: 1; }
+        .modal-desc p { font-size: 1.15rem; line-height: 1.7; color: #222; max-width: 650px; }
 
         /* --- Footer --- */
-        #footer { padding: 8rem 4%; background: #000; color: #fff; }
-        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; }
-        .footer-grid h2 { font-size: 3rem; letter-spacing: -2px; margin-bottom: 2rem; }
+        #footer { padding: 10rem 4%; background: #000; color: #fff; }
+        .footer-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 8rem; max-width: 1400px; margin: 0 auto; }
+        .footer-grid h2 { font-size: 3.5rem; letter-spacing: -2.5px; line-height: 0.9; }
         
         form input, form textarea {
-            width: 100%; background: none; border: none; border-bottom: 1px solid #444;
-            padding: 1.5rem 0; color: #fff; font-family: inherit; font-size: 1rem; margin-bottom: 1rem;
+            width: 100%; background: none; border: none; border-bottom: 1px solid #333;
+            padding: 1.2rem 0; color: #fff; font-family: inherit; font-size: 1rem; margin-bottom: 1rem;
         }
         form input:focus { outline: none; border-bottom-color: #fff; }
-        .btn-submit { background: #fff; color: #000; border: none; padding: 1rem 3rem; font-weight: 700; text-transform: uppercase; font-size: 0.7rem; cursor: pointer; margin-top: 2rem;}
+        .btn-submit { background: #fff; color: #000; border: none; padding: 1.2rem 3.5rem; font-weight: 800; text-transform: uppercase; font-size: 0.7rem; cursor: pointer; margin-top: 2rem; transition: 0.3s; }
+        .btn-submit:hover { letter-spacing: 2px; }
 
         /* --- Mobile Optimization --- */
-        @media (max-width: 1100px) { #main { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 1200px) { #main { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             #main { grid-template-columns: 1fr; }
-            .thumb { padding: 30px; }
-            .modal-meta-container { grid-template-columns: 1fr; gap: 2rem; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .modal-desc h2 { font-size: 1.8rem; }
-            #header { padding: 1.5rem 5%; }
-            nav ul { gap: 1rem; }
+            .modal-meta-container { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 4rem; }
+            .modal-desc h2 { font-size: 2rem; }
+            .technical-specs { border-top: 2px solid #000; }
         }
     </style>
 </head>
 <body>
 
     <header id="header">
-        <h1><a href="#">Sprocklight / Digital</a></h1>
+        <h1><a href="#">Sprocklight // Digital</a></h1>
         <nav>
             <ul>
-                <li><a href="#">Work</a></li>
-                <li><a href="#footer">Contact</a></li>
+                <li><a href="https://sprocklight.github.io/home/">Home</a></li>
+                <li><a href="#footer">Inquiry</a></li>
             </ul>
         </nav>
     </header>
 
     <div id="main">
-        <article class="thumb" onclick="openProject('WKNDR CREATIVE', 'DIGITAL BRANDING', 'images/thumbs/01.jpg', 'Visual engineering for WKNDR. We focused on a high-contrast aesthetic that bridges the gap between technical precision and lifestyle energy.', '1920 x 1080 PX', '2026')">
+        <article class="thumb" onclick="openProject('WKNDR CREATIVE', 'DIGITAL BRANDING', 'images/thumbs/01.jpg', 'High-impact visual engineering for WKNDR. This project bridges the gap between technical precision and contemporary lifestyle energy.', '1920 x 1080', '2026')">
             <div class="image-wrap"><img src="images/thumbs/01.jpg" alt="WKNDR"></div>
-            <div class="thumb-info"><h2>WKNDR</h2><p>Digital Branding</p></div>
+            <div class="thumb-info"><h2>WKNDR</h2><p>Design • Banner</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('SKINCARTEL', 'MOTION DESIGN', 'images/thumbs/07.gif', 'High-fidelity motion assets created for SkinCartel. Every frame was optimized for luxury consumer engagement.', '1080 x 1080 PX', '2025')">
+        <article class="thumb" onclick="openProject('SKINCARTEL', 'MOTION DESIGN', 'images/thumbs/07.gif', 'Engineered motion assets for SkinCartel. Every frame is optimized for luxury consumer engagement and performance metrics.', '1080 x 1080', '2025')">
             <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel"></div>
             <div class="thumb-info"><h2>SkinCartel</h2><p>Motion Graphics</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('THE EMERALD', 'WEB ARCHITECTURE', 'images/thumbs/10.jpg', 'A full-scale digital restructuring of The Emerald Events Place. Precision SEO and a mobile-first interface.', '2560 x 1440 PX', '2026')">
+        <article class="thumb" onclick="openProject('THE EMERALD', 'WEB ARCHITECTURE', 'images/thumbs/10.jpg', 'Digital restructuring of The Emerald Events Place. Precision SEO, host migration, and a total interface overhaul.', '2560 x 1440', '2026')">
             <div class="image-wrap"><img src="images/thumbs/10.jpg" alt="Emerald"></div>
-            <div class="thumb-info"><h2>The Emerald</h2><p>SEO • Design</p></div>
+            <div class="thumb-info"><h2>The Emerald</h2><p>Development • SEO</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('KOFFEE KART', 'IDENTITY DESIGN', 'images/thumbs/00.jpg', 'The official identity system for Koffee Kart. Custom vector iconography and a modular layout system.', 'A4 PRINT SPEC', '2025')">
+        <article class="thumb" onclick="openProject('KOFFEE KART', 'IDENTITY SYSTEM', 'images/thumbs/00.jpg', 'A comprehensive brand identity system for Koffee Kart. Custom vector iconography and modular corporate layout.', 'VECTOR / A4', '2025')">
             <div class="image-wrap"><img src="images/thumbs/00.jpg" alt="Koffee"></div>
-            <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Vectors</p></div>
+            <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Layout</p></div>
+        </article>
+
+        <article class="thumb" onclick="openProject('JAUNTER V1', 'INTERFACE DESIGN', 'images/thumbs/09.jpg', 'Iterative interface design for the Jaunter ecosystem. Focused on high usability and sharp visual hierarchies.', '1440 x 900', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/09.jpg" alt="Jaunter"></div>
+            <div class="thumb-info"><h2>Jaunter V1</h2><p>Interface • UI</p></div>
+        </article>
+
+        <article class="thumb" onclick="openProject('CHEF MARIA', 'PROMOTIONAL ASSETS', 'images/thumbs/06.jpg', 'High-conversion campaign assets for social media deployment. Targeted visual storytelling for premium catering.', '1200 x 628', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/06.jpg" alt="Chef Maria"></div>
+            <div class="thumb-info"><h2>Chef Maria</h2><p>Campaign • Social</p></div>
+        </article>
+
+        <article class="thumb" onclick="openProject('TURBINE TORCHER', 'PRODUCT PRODUCTION', 'images/thumbs/02.jpg', 'Creative direction and photoshoot execution for Turbine Torcher. Integrated with Shopify visual standards.', '3000 x 2000', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine"></div>
+            <div class="thumb-info"><h2>Turbine Torcher</h2><p>Photography • Web</p></div>
+        </article>
+
+        <article class="thumb" onclick="openProject('JAUNTER Q3', 'CAMPAIGN STRATEGY', 'images/thumbs/13.gif', 'Social media campaign visuals for Jaunter Q3. Utilizing motion to increase CTR and brand awareness.', '1080 x 1350', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/13.gif" alt="Jaunter Q3"></div>
+            <div class="thumb-info"><h2>Jaunter Q3</h2><p>Marketing • Motion</p></div>
         </article>
     </div>
 
     <div id="modal-overlay">
         <div class="modal-header">
-            <span style="font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;">PROJECT DETAIL</span>
-            <button class="close-modal" onclick="closeProject()">CLOSE [ESC]</button>
+            <span style="font-size: 0.65rem; font-weight: 800; letter-spacing: 2px;">PROJECT INDEX / 001</span>
+            <button class="close-modal" onclick="closeProject()">CLOSE</button>
         </div>
         <div class="modal-body">
-            <img src="" id="modal-img" class="modal-main-img" alt="Project">
+            <img src="" id="modal-img" class="modal-main-img" alt="Project Detail">
             
             <div class="modal-meta-container">
                 <div class="technical-specs">
-                    <span>DIMENSIONS</span>
-                    <div id="modal-dim" style="margin-bottom: 20px;">0000 x 0000</div>
+                    <div class="spec-item">
+                        <span>DIMENSIONS</span>
+                        <div id="modal-dim">0000 x 0000</div>
+                    </div>
                     
-                    <span>YEAR / STATUS</span>
-                    <div id="modal-year" style="margin-bottom: 20px;">2026 / RELEASED</div>
+                    <div class="spec-item">
+                        <span>YEAR / COMPLETION</span>
+                        <div id="modal-year">2026 // RELEASED</div>
+                    </div>
                     
-                    <span>DISCIPLINE</span>
-                    <div id="modal-cat">DESIGN</div>
+                    <div class="spec-item">
+                        <span>DISCIPLINE</span>
+                        <div id="modal-cat">DESIGN STRATEGY</div>
+                    </div>
                 </div>
 
                 <div class="modal-desc">
                     <h2 id="modal-title">TITLE</h2>
-                    <p id="modal-text">Description text...</p>
+                    <p id="modal-text">Description...</p>
                 </div>
             </div>
         </div>
@@ -216,15 +242,15 @@
     <footer id="footer">
         <div class="footer-grid">
             <div>
-                <h2>Precision in <br>Digital Design.</h2>
-                <p style="color: #888; margin-top: 2rem;">© 2026 SPROCKLIGHT DIGITAL SERVICES. <br>ALL RIGHTS RESERVED.</p>
+                <h2>Precision <br>Design <br>Bureau.</h2>
+                <p style="color: #666; margin-top: 3rem; font-size: 0.8rem; letter-spacing: 1px;">© 2026 SPROCKLIGHT DIGITAL. <br>LOCATED IN MANILA / REMOTE READY.</p>
             </div>
             <div>
                 <form action="mailto:anthony.juco@gmail.com" method="post">
-                    <input type="text" placeholder="NAME" required>
-                    <input type="email" placeholder="EMAIL ADDRESS" required>
-                    <textarea rows="4" placeholder="PROJECT INQUIRY" required></textarea>
-                    <button type="submit" class="btn-submit">Initialize Contact</button>
+                    <input type="text" placeholder="NAME / ORGANIZATION" required>
+                    <input type="email" placeholder="EMAIL@DOMAIN.COM" required>
+                    <textarea rows="4" placeholder="BRIEF PROJECT OVERVIEW" required></textarea>
+                    <button type="submit" class="btn-submit">Execute Inquiry</button>
                 </form>
             </div>
         </div>
@@ -237,7 +263,7 @@
             document.getElementById('modal-img').src = img;
             document.getElementById('modal-text').innerText = text;
             document.getElementById('modal-dim').innerText = dim;
-            document.getElementById('modal-year').innerText = year + ' / COMPLETED';
+            document.getElementById('modal-year').innerText = year + ' // FINALIZED';
             
             document.getElementById('modal-overlay').style.display = 'flex';
             document.body.classList.add('modal-open');
@@ -248,7 +274,6 @@
             document.body.classList.remove('modal-open');
         }
 
-        // Close on ESC key
         window.addEventListener('keydown', (e) => {
             if(e.key === 'Escape') closeProject();
         });
