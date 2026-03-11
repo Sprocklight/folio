@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>Sprocklight | Archive 2026</title>
+    <title>Sprocklight | Precision Archive</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,11 +11,10 @@
 
     <style>
         :root {
-            --bg-color: #F4F7F9; /* Professional Light Blue-White */
-            --text-main: #001A70; /* Burkhalter Royal Blue */
+            --bg-color: #F4F7F9;
+            --text-main: #001A70;
             --text-body: #2d3436;
-            --line-color: rgba(0, 26, 112, 0.1); /* Subtle Navy Hairlines */
-            --accent: #001A70;
+            --line-color: rgba(0, 26, 112, 0.1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
@@ -29,10 +28,10 @@
 
         body.modal-open { overflow: hidden; }
 
-        /* --- Global Grid Layout --- */
+        /* --- Global Header --- */
         #header {
             position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.5rem 4%;
-            background: rgba(244, 247, 249, 0.85); backdrop-filter: blur(20px);
+            background: rgba(244, 247, 249, 0.7); backdrop-filter: blur(20px);
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--line-color);
         }
@@ -47,7 +46,7 @@
             font-size: 0.65rem; text-transform: uppercase; margin-left: 2.5rem; letter-spacing: 1px;
         }
 
-        /* --- 4-Column Rectangular Grid --- */
+        /* --- Grid Layout --- */
         #main {
             padding: 80px 0 0 0;
             display: grid;
@@ -68,199 +67,170 @@
             border: 1px solid var(--line-color);
         }
 
-        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1); }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 1s cubic-bezier(0.19, 1, 0.22, 1); }
         .thumb:hover img { transform: scale(1.04); }
 
-        .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
         .thumb-info p { font-size: 0.6rem; color: #777; text-transform: uppercase; letter-spacing: 1.5px; }
 
-        /* --- The Swiss Modal (Awwwards Style) --- */
+        /* --- The Hero Modal (Burkhalter Style) --- */
         #modal-overlay {
             position: fixed; inset: 0; z-index: 1001; background: #fff;
             display: none; flex-direction: column; overflow-y: auto;
         }
 
+        /* FLOATING MODAL HEADER */
         .modal-header {
-            padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--line-color); position: sticky; top: 0; background: #fff; z-index: 10;
+            padding: 1.2rem 4%; display: flex; justify-content: space-between; align-items: center;
+            position: fixed; top: 0; width: 100%; z-index: 101; 
+            background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--line-color);
         }
 
         .close-btn {
-            background: none; border: 1px solid var(--text-main); padding: 6px 18px;
+            background: none; border: 1px solid var(--text-main); padding: 5px 15px;
             font-size: 0.6rem; font-weight: 800; cursor: pointer; color: var(--text-main);
-            text-transform: uppercase; transition: 0.3s;
+            text-transform: uppercase;
         }
-        .close-btn:hover { background: var(--text-main); color: #fff; }
 
-        .modal-body { width: 100%; max-width: 1300px; margin: 0 auto; padding: 5vh 4% 10vh; }
-        .modal-main-img { width: 100%; height: auto; display: block; border: 1px solid var(--line-color); }
+        /* HERO IMAGE CONTAINER */
+        .modal-hero-container {
+            width: 100%;
+            height: 85vh; /* Hero Height */
+            position: relative;
+            background: #000;
+        }
 
-        /* Meta block on Lower Left of Image */
+        .modal-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* This makes it act as a background */
+            display: block;
+        }
+
+        /* CONTENT SECTION BELOW PHOTO */
+        .modal-content-area {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 4rem 4% 10rem;
+        }
+
         .lower-left-meta {
-            margin-top: 2rem;
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-            border-left: 3px solid var(--accent); padding-left: 25px;
-            max-width: 600px;
+            border-left: 3px solid var(--text-main); padding-left: 25px;
+            margin-bottom: 5rem;
         }
 
-        .meta-label { font-size: 0.55rem; font-weight: 800; color: #999; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+        .meta-label { font-size: 0.55rem; font-weight: 800; color: #999; text-transform: uppercase; margin-bottom: 5px; }
         .meta-value { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--text-main); }
 
-        .modal-desc-wrap { margin-top: 4rem; display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; }
-        
-        /* Serif Large Headline */
         .modal-desc-wrap h2 { 
             font-family: 'Cormorant Garamond', serif; 
-            font-size: 4.5rem; font-weight: 400; line-height: 0.9; 
-            color: var(--text-main); letter-spacing: -2px;
+            font-size: 5rem; font-weight: 400; line-height: 0.9; 
+            color: var(--text-main); letter-spacing: -2px; margin-bottom: 2rem;
         }
 
         .modal-desc-wrap p { 
-            font-size: 1.25rem; line-height: 1.6; color: var(--text-body); 
-            font-weight: 400; padding-top: 1rem;
+            font-size: 1.3rem; line-height: 1.6; color: var(--text-body); max-width: 800px;
         }
 
         /* --- Footer --- */
         #footer { padding: 8rem 4%; background: var(--text-main); color: #fff; }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1400px; margin: 0 auto; }
-        .footer-grid h2 { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.85; letter-spacing: -3px; }
+        .footer-grid h2 { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.85; }
 
         input, textarea {
             width: 100%; background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 1.2rem 0; color: #fff; font-family: inherit; margin-bottom: 1.5rem; font-size: 1rem;
+            padding: 1.2rem 0; color: #fff; font-family: inherit; margin-bottom: 1.5rem;
         }
-        input:focus { outline: none; border-bottom-color: #fff; }
-        .btn-send { background: #fff; color: var(--text-main); border: none; padding: 1.2rem 3rem; font-weight: 800; text-transform: uppercase; font-size: 0.65rem; cursor: pointer; letter-spacing: 1px; }
 
-        /* --- Mobile --- */
-        @media (max-width: 1200px) { 
-            #main { grid-template-columns: repeat(2, 1fr); }
-            .modal-desc-wrap { grid-template-columns: 1fr; gap: 2rem; }
-            .modal-desc-wrap h2 { font-size: 3rem; }
-        }
+        /* --- Responsive --- */
+        @media (max-width: 1100px) { #main { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             #main { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
+            .modal-desc-wrap h2 { font-size: 3rem; }
+            .modal-hero-container { height: 60vh; }
             .lower-left-meta { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
     <header id="header">
-        <h1><a href="#">Sprocklight / Precision</a></h1>
+        <h1><a href="#">Sprocklight / Bureau</a></h1>
         <nav>
-            <a href="https://sprocklight.github.io/home/">Home</a>
-            <a href="#footer">Inquiry</a>
+            <a href="#">Home</a>
+            <a href="#footer">Contact</a>
         </nav>
     </header>
 
     <div id="main">
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'Bridging the gap between technical precision and creative energy for WKNDR. This identity focuses on high-contrast layouts and minimalist Swiss typography.', '1920 x 1080 PX', '2026')">
+        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'Bridging the gap between technical precision and creative energy for WKNDR. High-contrast layouts and minimalist Swiss typography.', '1920 x 1080 PX', '2026')">
             <div class="image-wrap"><img src="images/thumbs/01.jpg" alt="WKNDR"></div>
             <div class="thumb-info"><h2>WKNDR Creative</h2><p>Identity • 2026</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'High-fidelity motion design created for luxury branding at SkinCartel. Every transition is engineered for maximum consumer impact.', '1080 x 1080 PX', '2025')">
+        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'High-fidelity motion design created for luxury branding at SkinCartel. Engineered for maximum consumer impact.', '1080 x 1080 PX', '2025')">
             <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel"></div>
             <div class="thumb-info"><h2>SkinCartel</h2><p>Motion • 2025</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'Creative direction and full-scale photoshoot execution for Turbine Torcher. Integrated with high-performance e-commerce standards.', '3000 x 2000 PX', '2026')">
+        <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'Creative direction and full-scale photoshoot execution for Turbine Torcher. Integrated with high-performance standards.', '3000 x 2000 PX', '2026')">
             <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine"></div>
             <div class="thumb-info"><h2>Turbine Torcher</h2><p>E-Comm • 2026</p></div>
         </article>
-
-        <article class="thumb" onclick="openProject('Minimal Layout.', 'Editorial Design', 'images/thumbs/03.jpg', 'A comprehensive digital editing project for the Jaunter Airpods collection. Focused on sleek, Apple-style minimalism for the brochures.', 'A4 PRINT SPEC', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/03.jpg" alt="Jaunter"></div>
-            <div class="thumb-info"><h2>Jaunter Collection</h2><p>Editorial • 2025</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Web Architecture.', 'Full Development', 'images/thumbs/10.jpg', 'A complete digital transformation of The Emerald Events Place. Precision SEO, hosting migration, and a total interface overhaul.', '2560 x 1440 PX', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/10.jpg" alt="Emerald"></div>
-            <div class="thumb-info"><h2>The Emerald</h2><p>Dev • SEO</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Social Engineering.', 'Campaign Design', 'images/thumbs/06.jpg', 'Targeted campaign assets for Chef Maria. Every visual is designed to highlight the premium craft and quality of the catering services.', '1200 x 628 PX', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/06.jpg" alt="Chef Maria"></div>
-            <div class="thumb-info"><h2>Chef Maria</h2><p>Social • AD</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Material Showcase.', 'Product Design', 'images/thumbs/08.gif', 'Digital asset creation for JN Leather. Highlighting material texture and craftsmanship through subtle motion and sharp optics.', '1080 x 1080 PX', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/08.gif" alt="JN Leather"></div>
-            <div class="thumb-info"><h2>JN Leather</h2><p>Product • Visuals</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Interface V1.', 'UI Architecture', 'images/thumbs/09.jpg', 'The original architecture for the Jaunter ecosystem. Focused on high-usability and sharp visual hierarchies for a technical audience.', '1440 x 900 PX', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/09.jpg" alt="Jaunter UI"></div>
-            <div class="thumb-info"><h2>Jaunter V1</h2><p>UI • UX</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Vertical Impact.', 'Advertising', 'images/thumbs/05.jpg', 'Portrait-optimized Pinterest campaign for JHome. Designed to capture attention in high-velocity scroll environments.', '1080 x 1920 PX', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/05.jpg" alt="Pinterest"></div>
-            <div class="thumb-info"><h2>JHome Ads</h2><p>Pinterest • Mobile</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Corporate ID.', 'Brand Identity', 'images/thumbs/00.jpg', 'The official brand system for Koffee Kart. Custom vector iconography and a modular profile system for corporate presentations.', 'VECTOR SCALABLE', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/00.jpg" alt="Koffee Kart"></div>
-            <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Logo</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Future Iteration.', 'Interface Design', 'images/thumbs/13.gif', 'High-energy social campaign for Jaunter Q3. Utilizing motion and light to bridge the gap between tech and lifestyle.', '1080 x 1350 PX', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/13.gif" alt="Jaunter Q3"></div>
-            <div class="thumb-info"><h2>Jaunter V3</h2><p>Motion • Q3</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Visual Language.', 'Brand Assets', 'images/thumbs/04.jpg', 'Secondary interface assets for SkinCartel. Maintaining brand consistency across diverse digital touchpoints.', '1920 x 800 PX', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/04.jpg" alt="SkinCartel Asset"></div>
-            <div class="thumb-info"><h2>SkinCartel ID</h2><p>Assets • Digital</p></div>
-        </article>
-    </div>
+        
+        </div>
 
     <div id="modal-overlay">
         <div class="modal-header">
-            <span style="font-size: 0.65rem; font-weight: 800; letter-spacing: 2px;">PROJECT INDEX // SELECTION 2026</span>
-            <button class="close-btn" onclick="closeProject()">CLOSE [ESC]</button>
+            <span style="font-size: 0.65rem; font-weight: 800; letter-spacing: 2px;">PROJECT INDEX // SELECTION</span>
+            <button class="close-btn" onclick="closeProject()">CLOSE</button>
         </div>
+
         <div class="modal-body">
-            
-            <img src="" id="modal-img" class="modal-main-img" alt="Selection">
-            
-            <div class="lower-left-meta">
-                <div>
-                    <div class="meta-label">Technical Scale</div>
-                    <div id="modal-dim" class="meta-value">0000 x 0000 PX</div>
-                </div>
-                <div>
-                    <div class="meta-label">Completion</div>
-                    <div id="modal-year" class="meta-value">2026</div>
-                </div>
-                <div>
-                    <div class="meta-label">Domain</div>
-                    <div id="modal-cat" class="meta-value">STRATEGY</div>
-                </div>
+            <div class="modal-hero-container">
+                <img src="" id="modal-img" class="modal-main-img" alt="Hero">
             </div>
 
-            <div class="modal-desc-wrap">
-                <h2 id="modal-title">Project Title.</h2>
-                <p id="modal-text">Project description will appear here based on your archival data.</p>
-            </div>
+            <div class="modal-content-area">
+                <div class="lower-left-meta">
+                    <div>
+                        <div class="meta-label">Technical Scale</div>
+                        <div id="modal-dim" class="meta-value">0000 x 0000 PX</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">Completion</div>
+                        <div id="modal-year" class="meta-value">2026</div>
+                    </div>
+                    <div>
+                        <div class="meta-label">Domain</div>
+                        <div id="modal-cat" class="meta-value">STRATEGY</div>
+                    </div>
+                </div>
 
+                <div class="modal-desc-wrap">
+                    <h2 id="modal-title">Title.</h2>
+                    <p id="modal-text">Description...</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <footer id="footer">
         <div class="footer-grid">
             <div>
-                <h2>Digital<br>Precision.<br>Sprocklight.</h2>
-                <p style="margin-top: 3rem; opacity: 0.5; font-size: 0.75rem; letter-spacing: 1.5px;">© 2026 SPROCKLIGHT DIGITAL SERVICES.<br>ESTABLISHED 2018 / MANILA.</p>
+                <h2>Digital<br>Precision.</h2>
+                <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.75rem;">© 2026 SPROCKLIGHT DIGITAL SERVICES.</p>
             </div>
             <div>
                 <form action="mailto:anthony.juco@gmail.com" method="post">
-                    <input type="text" placeholder="NAME / ORGANIZATION" required>
-                    <input type="email" placeholder="EMAIL@DOMAIN.COM" required>
-                    <textarea rows="3" placeholder="DESCRIBE YOUR PROJECT" required></textarea>
-                    <button type="submit" class="btn-send">Execute Inquiry</button>
+                    <input type="text" placeholder="NAME" required>
+                    <input type="email" placeholder="EMAIL" required>
+                    <textarea rows="3" placeholder="PROJECT BRIEF"></textarea>
+                    <button type="submit" style="background:#fff; color:#001A70; border:none; padding:1rem 2rem; font-weight:800; cursor:pointer;">SUBMIT</button>
                 </form>
             </div>
         </div>
@@ -284,9 +254,7 @@
             document.body.classList.remove('modal-open');
         }
 
-        window.addEventListener('keydown', (e) => {
-            if(e.key === 'Escape') closeProject();
-        });
+        window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeProject(); });
     </script>
 </body>
 </html>
