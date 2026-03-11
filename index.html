@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>Sprocklight | Precision Archive</title>
+    <title>Sprocklight | Archive 2026</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,38 +28,38 @@
 
         body.modal-open { overflow: hidden; }
 
-        /* --- Global Header --- */
+        /* --- Header Fix: One line on Mobile --- */
         #header {
-            position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.5rem 4%;
+            position: fixed; top: 0; width: 100%; z-index: 100; padding: 1.2rem 4%;
             background: rgba(244, 247, 249, 0.7); backdrop-filter: blur(20px);
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid var(--line-color);
+            flex-wrap: nowrap; /* Forces one line */
         }
 
         #header h1 a {
             text-decoration: none; color: var(--text-main);
-            font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px;
+            font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px;
+            white-space: nowrap;
         }
 
+        nav { display: flex; align-items: center; }
         nav a { 
             text-decoration: none; color: var(--text-main); font-weight: 600; 
-            font-size: 0.65rem; text-transform: uppercase; margin-left: 2.5rem; letter-spacing: 1px;
+            font-size: 0.65rem; text-transform: uppercase; margin-left: 1.5rem; letter-spacing: 1px;
+            white-space: nowrap;
         }
 
         /* --- Grid Layout --- */
         #main {
-            padding: 80px 0 0 0;
+            padding: 70px 0 0 0;
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 1px;
             background: var(--line-color);
         }
 
-        .thumb {
-            background: #fff; padding: 3.5rem 1.5rem; cursor: pointer;
-            transition: background 0.4s ease;
-        }
-
+        .thumb { background: #fff; padding: 3rem 1.5rem; cursor: pointer; transition: 0.4s; }
         .thumb:hover { background: var(--bg-color); }
 
         .thumb .image-wrap {
@@ -71,168 +71,156 @@
         .thumb:hover img { transform: scale(1.04); }
 
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
-        .thumb-info p { font-size: 0.6rem; color: #777; text-transform: uppercase; letter-spacing: 1.5px; }
+        .thumb-info p { font-size: 0.6rem; color: #777; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* --- The Hero Modal (Burkhalter Style) --- */
+        /* --- Modal Structure --- */
         #modal-overlay {
             position: fixed; inset: 0; z-index: 1001; background: #fff;
             display: none; flex-direction: column; overflow-y: auto;
         }
 
-        /* FLOATING MODAL HEADER */
         .modal-header {
-            padding: 1.2rem 4%; display: flex; justify-content: space-between; align-items: center;
+            padding: 1rem 4%; display: flex; justify-content: space-between; align-items: center;
             position: fixed; top: 0; width: 100%; z-index: 101; 
-            background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--line-color);
         }
 
         .close-btn {
-            background: none; border: 1px solid var(--text-main); padding: 5px 15px;
+            background: none; border: 1px solid var(--text-main); padding: 5px 12px;
             font-size: 0.6rem; font-weight: 800; cursor: pointer; color: var(--text-main);
-            text-transform: uppercase;
         }
 
-        /* HERO IMAGE CONTAINER */
-        .modal-hero-container {
-            width: 100%;
-            height: 85vh; /* Hero Height */
-            position: relative;
-            background: #000;
-        }
+        .modal-hero-container { width: 100%; height: 85vh; background: #000; }
+        .modal-main-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .modal-main-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* This makes it act as a background */
-            display: block;
-        }
-
-        /* CONTENT SECTION BELOW PHOTO */
-        .modal-content-area {
-            width: 100%;
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 4rem 4% 10rem;
-        }
+        .modal-content-area { width: 100%; max-width: 1200px; margin: 0 auto; padding: 4rem 4% 8rem; }
 
         .lower-left-meta {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-            border-left: 3px solid var(--text-main); padding-left: 25px;
-            margin-bottom: 5rem;
+            border-left: 3px solid var(--text-main); padding-left: 20px; margin-bottom: 4rem;
         }
 
-        .meta-label { font-size: 0.55rem; font-weight: 800; color: #999; text-transform: uppercase; margin-bottom: 5px; }
-        .meta-value { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; color: var(--text-main); }
+        .meta-label { font-size: 0.55rem; font-weight: 800; color: #999; text-transform: uppercase; margin-bottom: 4px; }
+        .meta-value { font-size: 0.7rem; font-weight: 600; text-transform: uppercase; }
 
         .modal-desc-wrap h2 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 5rem; font-weight: 400; line-height: 0.9; 
-            color: var(--text-main); letter-spacing: -2px; margin-bottom: 2rem;
+            font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; font-weight: 400; 
+            line-height: 0.9; color: var(--text-main); letter-spacing: -2px; margin-bottom: 2rem;
         }
 
-        .modal-desc-wrap p { 
-            font-size: 1.3rem; line-height: 1.6; color: var(--text-body); max-width: 800px;
-        }
+        .modal-desc-wrap p { font-size: 1.2rem; line-height: 1.6; color: var(--text-body); max-width: 800px; }
 
         /* --- Footer --- */
-        #footer { padding: 8rem 4%; background: var(--text-main); color: #fff; }
-        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; max-width: 1400px; margin: 0 auto; }
-        .footer-grid h2 { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.85; }
+        #footer { padding: 6rem 4%; background: var(--text-main); color: #fff; }
+        .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; }
+        .footer-grid h2 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; line-height: 0.9; }
 
         input, textarea {
             width: 100%; background: none; border: none; border-bottom: 1px solid rgba(255,255,255,0.2);
-            padding: 1.2rem 0; color: #fff; font-family: inherit; margin-bottom: 1.5rem;
+            padding: 1rem 0; color: #fff; font-family: inherit; margin-bottom: 1rem;
         }
 
-        /* --- Responsive --- */
+        /* --- Mobile Optimization --- */
         @media (max-width: 1100px) { #main { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) {
             #main { grid-template-columns: 1fr; }
-            .modal-desc-wrap h2 { font-size: 3rem; }
-            .modal-hero-container { height: 60vh; }
-            .lower-left-meta { grid-template-columns: 1fr; }
+            .modal-desc-wrap h2 { font-size: 2.8rem; }
+            .modal-hero-container { height: 50vh; }
             .footer-grid { grid-template-columns: 1fr; }
+            #header { padding: 1rem 5%; }
+            nav a { margin-left: 1rem; font-size: 0.6rem; }
         }
     </style>
 </head>
 <body>
 
     <header id="header">
-        <h1><a href="#">Sprocklight / Bureau</a></h1>
+        <h1><a href="#">Sprocklight</a></h1>
         <nav>
-            <a href="#">Home</a>
-            <a href="#footer">Contact</a>
+            <a href="https://sprocklight.github.io/home/">Home</a>
+            <a href="#footer">Inquiry</a>
         </nav>
     </header>
 
     <div id="main">
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'Bridging the gap between technical precision and creative energy for WKNDR. High-contrast layouts and minimalist Swiss typography.', '1920 x 1080 PX', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/01.jpg" alt="WKNDR"></div>
+        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'Bridging technical precision and creative energy for WKNDR. High-contrast layouts with Swiss typography.', '1920 x 1080', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/01.jpg"></div>
             <div class="thumb-info"><h2>WKNDR Creative</h2><p>Identity • 2026</p></div>
         </article>
-
-        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'High-fidelity motion design created for luxury branding at SkinCartel. Engineered for maximum consumer impact.', '1080 x 1080 PX', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel"></div>
+        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'High-fidelity motion design created for luxury branding at SkinCartel.', '1080 x 1080', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/07.gif"></div>
             <div class="thumb-info"><h2>SkinCartel</h2><p>Motion • 2025</p></div>
         </article>
-
-        <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'Creative direction and full-scale photoshoot execution for Turbine Torcher. Integrated with high-performance standards.', '3000 x 2000 PX', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine"></div>
+        <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'Creative direction and full-scale photoshoot execution for Turbine Torcher.', '3000 x 2000', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/02.jpg"></div>
             <div class="thumb-info"><h2>Turbine Torcher</h2><p>E-Comm • 2026</p></div>
         </article>
-        
-        </div>
+        <article class="thumb" onclick="openProject('Minimal Layout.', 'Editorial Design', 'images/thumbs/03.jpg', 'Digital editing for the Jaunter Airpods collection. Apple-style minimalism.', 'A4 PRINT', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/03.jpg"></div>
+            <div class="thumb-info"><h2>Jaunter Collection</h2><p>Editorial • 2025</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Web Architecture.', 'Full Development', 'images/thumbs/10.jpg', 'Digital transformation of The Emerald Events Place. Precision SEO and hosting.', '2560 x 1440', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/10.jpg"></div>
+            <div class="thumb-info"><h2>The Emerald</h2><p>Dev • SEO</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Social Engineering.', 'Campaign Design', 'images/thumbs/06.jpg', 'Targeted campaign assets for Chef Maria. Premium craft catering storytelling.', '1200 x 628', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/06.jpg"></div>
+            <div class="thumb-info"><h2>Chef Maria</h2><p>Social • AD</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Material Showcase.', 'Product Design', 'images/thumbs/08.gif', 'Digital asset creation for JN Leather. Highlighting material texture.', '1080 x 1080', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/08.gif"></div>
+            <div class="thumb-info"><h2>JN Leather</h2><p>Product • Visuals</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Interface V1.', 'UI Architecture', 'images/thumbs/09.jpg', 'Original architecture for the Jaunter ecosystem. High usability for technical audiences.', '1440 x 900', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/09.jpg"></div>
+            <div class="thumb-info"><h2>Jaunter V1</h2><p>UI • UX</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Vertical Impact.', 'Advertising', 'images/thumbs/05.jpg', 'Portrait-optimized Pinterest campaign for JHome.', '1080 x 1920', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/05.jpg"></div>
+            <div class="thumb-info"><h2>JHome Ads</h2><p>Pinterest • Mobile</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Corporate ID.', 'Brand Identity', 'images/thumbs/00.jpg', 'Official brand system for Koffee Kart. Custom vector iconography.', 'VECTOR', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/00.jpg"></div>
+            <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Logo</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Future Iteration.', 'Interface Design', 'images/thumbs/13.gif', 'High-energy social campaign for Jaunter Q3.', '1080 x 1350', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/13.gif"></div>
+            <div class="thumb-info"><h2>Jaunter V3</h2><p>Motion • Q3</p></div>
+        </article>
+        <article class="thumb" onclick="openProject('Visual Language.', 'Brand Assets', 'images/thumbs/04.jpg', 'Secondary interface assets for SkinCartel consistent branding.', '1920 x 800', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/04.jpg"></div>
+            <div class="thumb-info"><h2>SkinCartel ID</h2><p>Assets • Digital</p></div>
+        </article>
+    </div>
 
     <div id="modal-overlay">
         <div class="modal-header">
-            <span style="font-size: 0.65rem; font-weight: 800; letter-spacing: 2px;">PROJECT INDEX // SELECTION</span>
+            <span style="font-size: 0.6rem; font-weight: 800; letter-spacing: 2px;">PROJECT INDEX</span>
             <button class="close-btn" onclick="closeProject()">CLOSE</button>
         </div>
-
         <div class="modal-body">
-            <div class="modal-hero-container">
-                <img src="" id="modal-img" class="modal-main-img" alt="Hero">
-            </div>
-
+            <div class="modal-hero-container"><img src="" id="modal-img" class="modal-main-img"></div>
             <div class="modal-content-area">
                 <div class="lower-left-meta">
-                    <div>
-                        <div class="meta-label">Technical Scale</div>
-                        <div id="modal-dim" class="meta-value">0000 x 0000 PX</div>
-                    </div>
-                    <div>
-                        <div class="meta-label">Completion</div>
-                        <div id="modal-year" class="meta-value">2026</div>
-                    </div>
-                    <div>
-                        <div class="meta-label">Domain</div>
-                        <div id="modal-cat" class="meta-value">STRATEGY</div>
-                    </div>
+                    <div><div class="meta-label">Technical Scale</div><div id="modal-dim" class="meta-value">---</div></div>
+                    <div><div class="meta-label">Completion</div><div id="modal-year" class="meta-value">---</div></div>
+                    <div><div class="meta-label">Domain</div><div id="modal-cat" class="meta-value">---</div></div>
                 </div>
-
-                <div class="modal-desc-wrap">
-                    <h2 id="modal-title">Title.</h2>
-                    <p id="modal-text">Description...</p>
-                </div>
+                <div class="modal-desc-wrap"><h2 id="modal-title">---</h2><p id="modal-text">---</p></div>
             </div>
         </div>
     </div>
 
     <footer id="footer">
         <div class="footer-grid">
-            <div>
-                <h2>Digital<br>Precision.</h2>
-                <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.75rem;">© 2026 SPROCKLIGHT DIGITAL SERVICES.</p>
-            </div>
-            <div>
-                <form action="mailto:anthony.juco@gmail.com" method="post">
-                    <input type="text" placeholder="NAME" required>
-                    <input type="email" placeholder="EMAIL" required>
-                    <textarea rows="3" placeholder="PROJECT BRIEF"></textarea>
-                    <button type="submit" style="background:#fff; color:#001A70; border:none; padding:1rem 2rem; font-weight:800; cursor:pointer;">SUBMIT</button>
-                </form>
-            </div>
+            <div><h2>Digital<br>Precision.</h2><p style="margin-top:2rem; opacity:0.5; font-size:0.75rem;">© 2026 SPROCKLIGHT.</p></div>
+            <form action="mailto:anthony.juco@gmail.com" method="post">
+                <input type="text" placeholder="NAME" required>
+                <input type="email" placeholder="EMAIL" required>
+                <textarea rows="2" placeholder="MESSAGE"></textarea>
+                <button type="submit" style="background:#fff; color:#001A70; border:none; padding:1rem 2rem; font-weight:800; cursor:pointer;">SUBMIT</button>
+            </form>
         </div>
     </footer>
 
@@ -244,16 +232,13 @@
             document.getElementById('modal-text').innerText = text;
             document.getElementById('modal-dim').innerText = dim;
             document.getElementById('modal-year').innerText = year;
-            
             document.getElementById('modal-overlay').style.display = 'flex';
             document.body.classList.add('modal-open');
         }
-
         function closeProject() {
             document.getElementById('modal-overlay').style.display = 'none';
             document.body.classList.remove('modal-open');
         }
-
         window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeProject(); });
     </script>
 </body>
