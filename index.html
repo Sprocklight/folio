@@ -15,7 +15,7 @@
             --text-main: #001A70;
             --text-body: #2d3436;
             --line-color: rgba(0, 26, 112, 0.1);
-            --glass-bg: rgba(255, 255, 255, 0.4);
+            --glass-bg: rgba(255, 255, 255, 0.45);
             --glass-blur: blur(25px) saturate(160%);
         }
 
@@ -30,70 +30,86 @@
 
         body.modal-open { overflow: hidden; }
 
-        /* --- Floating Inset Glass Header --- */
-        #header, .modal-header {
+        /* --- Home Header: Close to Full Width --- */
+        #header {
             position: fixed;
             top: 20px;
-            left: 4%;
-            right: 4%;
-            width: auto;
-            max-width: 1300px;
-            margin: 0 auto;
+            left: 2%; /* Closer to edges */
+            right: 2%;
+            width: 96%;
             z-index: 1000;
             padding: 1.2rem 2.5rem;
-            
             background: var(--glass-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
-            
             border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 4px; /* Subtle Swiss rounding */
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Vertical alignment fix */
+        }
+
+        /* --- Modal Header: Floating Pill Layout --- */
+        .modal-header {
+            position: fixed;
+            top: 30px;
+            left: 10%; /* More inset for that specific layout look */
+            right: 10%;
+            width: auto;
+            max-width: 1000px;
+            margin: 0 auto;
+            z-index: 1010;
+            padding: 1rem 2rem;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 100px; /* Pill shape */
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        #header h1 { margin: 0; line-height: 1; }
+        /* --- Logo & Nav Alignment --- */
+        #header h1, .modal-header span { 
+            margin: 0; 
+            line-height: 1; /* Match line height for perfect centering */
+            display: flex;
+            align-items: center;
+        }
+
         #header h1 a {
             text-decoration: none; color: var(--text-main);
             font-weight: 800; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 3px;
         }
 
-        nav { display: flex; align-items: center; }
+        nav { display: flex; align-items: center; line-height: 1; }
         nav a { 
             text-decoration: none; color: var(--text-main); font-weight: 600; 
             font-size: 0.65rem; text-transform: uppercase; margin-left: 1.8rem; letter-spacing: 1px;
         }
 
-        /* --- Minimalist Close Button (Lines) --- */
+        /* --- Close Button: Static X --- */
         .close-trigger {
-            width: 30px;
-            height: 20px;
+            background: none; border: none; cursor: pointer;
+            width: 24px; height: 24px;
             position: relative;
-            cursor: pointer;
-            background: none;
-            border: none;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 6px;
+            display: flex; align-items: center; justify-content: center;
         }
 
-        .line {
-            width: 100%;
+        .close-trigger::before, .close-trigger::after {
+            content: '';
+            position: absolute;
+            width: 18px;
             height: 1.5px;
             background-color: var(--text-main);
-            transition: 0.3s ease;
         }
-
-        /* Hover effect to cross the lines */
-        .close-trigger:hover .line:nth-child(1) { transform: translateY(4px) rotate(45deg); }
-        .close-trigger:hover .line:nth-child(2) { transform: translateY(-3.5px) rotate(-45deg); }
+        .close-trigger::before { transform: rotate(45deg); }
+        .close-trigger::after { transform: rotate(-45deg); }
 
         /* --- Grid Layout --- */
         #main {
-            padding: 110px 0 0 0;
+            padding: 120px 0 0 0;
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 1px; background: var(--line-color);
         }
@@ -121,7 +137,7 @@
         .modal-hero-container { width: 100%; height: 85vh; background: #000; position: relative; }
         .modal-main-img { width: 100%; height: 100%; object-fit: cover; }
 
-        .modal-content-area { width: 100%; max-width: 1200px; margin: 0 auto; padding: 5rem 4% 8rem; }
+        .modal-content-area { width: 100%; max-width: 1200px; margin: 0 auto; padding: 6rem 4% 8rem; }
 
         .lower-left-meta {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
@@ -148,19 +164,20 @@
             padding: 1.2rem 0; color: #fff; font-family: inherit; margin-bottom: 1.5rem;
         }
 
-        /* --- Mobile Optimization (Dribbble Layout) --- */
+        /* --- Mobile Optimization --- */
         @media (max-width: 768px) {
-            #header, .modal-header { top: 15px; left: 15px; right: 15px; padding: 0.9rem 1.2rem; }
+            #header { top: 10px; left: 2%; right: 2%; width: 96%; padding: 0.8rem 1.2rem; border-radius: 4px; }
+            .modal-header { top: 15px; left: 5%; right: 5%; width: 90%; padding: 0.7rem 1.2rem; }
+            
             #header h1 a { font-size: 0.7rem; letter-spacing: 2px; }
             nav a { margin-left: 1rem; font-size: 0.55rem; }
 
-            #main { padding-top: 100px; grid-template-columns: 1fr; }
+            #main { padding-top: 90px; grid-template-columns: 1fr; }
             .thumb { padding: 1.5rem 1rem; }
             .thumb .image-wrap { aspect-ratio: 4/3; margin-bottom: 0.8rem; }
-            .thumb-info h2 { font-size: 0.75rem; }
-
-            .modal-hero-container { height: 60vh; }
-            .modal-desc-wrap h2 { font-size: 3rem; }
+            
+            .modal-hero-container { height: 55vh; }
+            .modal-desc-wrap h2 { font-size: 2.8rem; }
             .footer-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -229,10 +246,7 @@
     <div id="modal-overlay">
         <div class="modal-header">
             <span style="font-size: 0.6rem; font-weight: 800; letter-spacing: 2px;">PROJECT INDEX</span>
-            <button class="close-trigger" onclick="closeProject()">
-                <div class="line"></div>
-                <div class="line"></div>
-            </button>
+            <button class="close-trigger" onclick="closeProject()"></button>
         </div>
         
         <div class="modal-body">
