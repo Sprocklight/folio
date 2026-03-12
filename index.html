@@ -37,35 +37,70 @@
         body.modal-open { overflow: hidden; position: fixed; width: 100%; }
         body.modal-open #header { display: none !important; }
 
-        /* --- Typographic Logo Styling --- */
-        .logo {
-            text-decoration: none; color: var(--text-main);
-            font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 3px;
-        }
-        .logo span { color: var(--accent-orange); margin-left: 2px; }
-
-        /* --- Wide Pill Home Header --- */
+        /* --- Aligned Wide Pill Home Header --- */
         #header {
             position: fixed;
             top: env(safe-area-inset-top, 20px);
             left: 2%; right: 2%; width: 96%;
             z-index: 1000;
-            padding: 1.1rem 3rem;
+            padding: 1.2rem 3rem; /* Symmetrical vertical padding */
             background: var(--header-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-radius: 100px;
             border: 1px solid rgba(255, 255, 255, 0.4);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        #header h1 { 
+            margin: 0; 
+            display: flex; 
+            align-items: center; 
+            line-height: 1; 
+        }
+
+        .logo {
+            text-decoration: none; 
+            color: var(--text-main);
+            font-weight: 800; 
+            font-size: 0.75rem; 
+            text-transform: uppercase; 
+            letter-spacing: 3px;
+            display: inline-flex;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .logo span { 
+            color: var(--accent-orange); 
+            margin-left: 4px; 
+            font-size: 0.7rem; 
+            display: inline-block;
+            line-height: 1;
+        }
+
+        nav { 
+            display: flex; 
+            align-items: center; 
+            line-height: 1; 
         }
 
         nav a { 
-            text-decoration: none; color: var(--text-main); font-weight: 600; 
-            font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; letter-spacing: 1.5px;
+            text-decoration: none; 
+            color: var(--text-main); 
+            font-weight: 600; 
+            font-size: 0.6rem; 
+            text-transform: uppercase; 
+            margin-left: 2rem; 
+            letter-spacing: 1.5px;
+            line-height: 1;
+            display: inline-block;
         }
 
-        /* --- Modal Header --- */
+        /* --- Aligned Modal Header --- */
         .modal-header {
             position: fixed;
             top: calc(env(safe-area-inset-top, 0px) + 20px);
@@ -77,7 +112,9 @@
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-radius: 100px;
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
             box-shadow: 0 15px 45px rgba(0,0,0,0.08);
         }
 
@@ -93,7 +130,7 @@
 
         /* --- Home Grid (4:3 Dribbble Ratio) --- */
         #main {
-            padding-top: 140px; 
+            padding-top: 150px; 
             display: grid; grid-template-columns: repeat(4, 1fr);
             background: #ffffff; gap: 1px; 
         }
@@ -105,7 +142,7 @@
         .thumb:hover { background: #fafafa; }
 
         .thumb .image-wrap { 
-            width: 100%; aspect-ratio: 4/3; /* Dribbble Match */
+            width: 100%; aspect-ratio: 4/3; 
             overflow: hidden; margin-bottom: 1.8rem; 
             border-radius: var(--radius); 
         }
@@ -124,7 +161,7 @@
 
         .modal-hero-container { 
             width: 100%; height: 80dvh; position: relative;
-            background: #f8f8f8; padding: 25px; /* The Frame */
+            background: #f8f8f8; padding: 25px; 
         }
 
         .modal-main-img { 
@@ -168,7 +205,10 @@
 
         /* --- Mobile Hub --- */
         @media (max-width: 768px) {
-            #header, .modal-header { width: 94%; padding: 0.8rem 1.2rem; }
+            #header, .modal-header { width: 94%; padding: 0.8rem 1.2rem; top: 15px; }
+            #header h1 a { font-size: 0.7rem; }
+            nav a { margin-left: 1rem; font-size: 0.55rem; }
+
             #main { grid-template-columns: 1fr; padding-top: 100px; }
             .thumb { padding: 2.5rem 1.5rem; } 
             
@@ -190,13 +230,12 @@
     </header>
 
     <div id="main">
- 
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/md.jpg', 'images/hero/01.jpg', 'Bridging technical precision and creative energy for WKNDR.', '1600 x 1200', '2026')">
+        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/md.jpg', 'images/hero/md.jpg', 'Modern aesthetics for a premium Interior Design agency.', '1600 x 1200', '2026')">
             <div class="image-wrap"><img src="images/thumbs/md.jpg"></div>
-            <div class="thumb-info"><h2>Interior Design Agency Website</h2><p>Website • 2026</p></div>
+            <div class="thumb-info"><h2>Interior Design Website</h2><p>Website • 2026</p></div>
         </article>
         
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'images/hero/01.jpg', 'Bridging technical precision and creative energy for WKNDR.', '1600 x 1200', '2026')">
+        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'images/hero/01.jpg', 'High-energy creatives for a modern fashion banner.', '1600 x 1200', '2026')">
             <div class="image-wrap"><img src="images/thumbs/01.jpg"></div>
             <div class="thumb-info"><h2>Fashion Website Banner</h2><p>Creatives • 2026</p></div>
         </article>
@@ -297,18 +336,13 @@
         function openProject(title, category, thumbImg, heroImg, text, dim, year) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-cat').innerText = category;
-            
-            // This now takes the 'heroImg' path specifically for the inside view
             document.getElementById('modal-img').src = heroImg;
-            
             document.getElementById('modal-text').innerText = text;
             document.getElementById('modal-dim').innerText = dim;
             document.getElementById('modal-year').innerText = year;
-            
             document.getElementById('modal-overlay').style.display = 'flex';
             document.body.classList.add('modal-open');
             document.getElementById('modal-overlay').scrollTop = 0;
-            
             setTimeout(() => { document.getElementById('modal-content').classList.add('animate-in'); }, 50);
         }
 
@@ -324,4 +358,3 @@
     </script>
 </body>
 </html>
-
