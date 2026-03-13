@@ -88,7 +88,7 @@
             height: 0.35em; 
             margin-left: 0.2em; 
             flex-shrink: 0;
-            transform: translateY(0.08em);
+            transform: translateY(0.18em);
         }
 
         nav { 
@@ -161,7 +161,7 @@
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
         .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
-        /* --- Modal Hero (Cinematic Settle & Drift) --- */
+        /* --- Modal Hero (Cinematic Settle & Drift with Freeze Fix) --- */
         #modal-overlay {
             position: fixed; inset: 0; width: 100%; height: 100dvh; 
             z-index: 9999; background: #ffffff; display: none;
@@ -186,15 +186,14 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.04);
             transform: scale(1.04);
             opacity: 0;
-            
-            /* THE FIX: 0.01s duration forces the browser to respect the 0.5s delay hold */
-            transition: opacity 0.4s ease, transform 0.01s linear 0.5s;
+            /* 0.8s lock prevents any jumping during the fade out */
+            transition: opacity 0.4s ease, transform 0.01s linear 0.8s;
         }
         
         #modal-overlay.is-visible .modal-main-img {
             transform: scale(1);
             opacity: 1;
-            /* The cinematic drift on the way IN */
+            /* The cinematic settle on the way IN */
             transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
 
@@ -203,9 +202,8 @@
             width: 100%; max-width: 1100px; margin: 0 auto; padding: 4rem 5% 10rem;
             opacity: 0; 
             transform: translateY(20px); 
-            
-            /* THE FIX: Same hold trick for the text content */
-            transition: opacity 0.3s ease, transform 0.01s linear 0.5s;
+            /* 0.8s lock prevents any jumping during the fade out */
+            transition: opacity 0.3s ease, transform 0.01s linear 0.8s;
         }
         
         #modal-overlay.is-visible .modal-content-area { 
@@ -394,11 +392,11 @@
             // Starts the fade out
             overlay.classList.remove('is-visible');
             
-            // Waits exactly 500ms before removing from layout
+            // 600ms safety buffer guarantees absolute invisibility before layout shifts
             setTimeout(() => {
                 overlay.style.display = 'none';
                 document.body.classList.remove('modal-open');
-            }, 500);
+            }, 600);
         }
 
         window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeProject(); });
@@ -422,5 +420,3 @@
     </script>
 </body>
 </html>
-
-
