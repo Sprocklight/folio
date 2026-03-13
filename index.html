@@ -13,8 +13,8 @@
     <style>
         :root {
             --bg-color: #ffffff; 
-            --text-main: #001A70; /* Strategic Navy */
-            --accent-orange: #FF4500; /* Original Brand Orange */
+            --text-main: #001A70; 
+            --accent-orange: #FF4500; 
             --text-body: #2d3436;
             --line-color: #f2f2f2; 
             --header-bg: rgba(242, 242, 245, 0.9); 
@@ -28,7 +28,7 @@
         html { 
             height: 100%; 
             background-color: var(--bg-color); 
-            scrollbar-gutter: stable; /* Crucial for Desktop close nudge */
+            scrollbar-gutter: stable; 
         }
 
         body {
@@ -41,14 +41,14 @@
 
         body.modal-open { overflow: hidden; }
 
-        /* --- Header & Navigation (Brutalist Style) --- */
+        /* --- Header & Navigation (Locked Vertical Alignment) --- */
         #header {
             position: fixed;
             top: calc(env(safe-area-inset-top, 0px) + 30px);
             left: 2%; right: 2%; width: 96%;
             z-index: 1000;
             padding: 0 3rem; 
-            height: 70px; /* Fixed height for absolute alignment */
+            height: 70px; 
             background: var(--header-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
@@ -63,54 +63,49 @@
 
         #header.hidden { transform: translateY(calc(-100% - 100px)); }
 
+        #header h1 { margin: 0; display: flex; align-items: center; height: 100%; }
+
         .logo {
             font-family: 'Inter', sans-serif; 
             font-weight: 700; 
-            display: inline-flex;
+            display: flex; /* True flex centering for the optical baseline */
             align-items: center; 
             text-decoration: none;
             color: var(--text-main);
             font-size: 1.1rem; 
             text-transform: uppercase; 
             letter-spacing: -0.02em; 
-            line-height: 1; 
         }
 
         .logo span {
-            display: inline-block;
+            display: block;
             background-color: var(--accent-orange); 
             width: 0.35em; height: 0.35em; 
             margin-left: 0.2em; 
-            transform: translateY(0.18em); 
+            transform: translateY(0.18em); /* Your custom lock-in */
         }
 
         nav { display: flex; align-items: center; height: 100%; }
 
         nav a { 
             position: relative;
-            text-decoration: none; 
-            color: var(--text-main); 
-            font-weight: 700; 
-            font-size: 0.6rem; 
-            text-transform: uppercase; 
-            margin-left: 2.5rem; 
-            letter-spacing: 1.5px;
-            z-index: 1;
+            text-decoration: none; color: var(--text-main); font-weight: 600; 
+            font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; 
+            letter-spacing: 1.5px; display: inline-block;
+            padding-bottom: 4px; /* Gives the micro-interaction room to breathe */
         }
 
-        /* Brutalist Hover: A solid block that appears behind the text */
-        nav a::before {
+        /* Elegant Micro-interaction replacing the Brutalist block */
+        nav a::after {
             content: '';
             position: absolute;
-            left: -4px; right: -4px; bottom: 0;
-            height: 0;
-            background: var(--accent-orange);
-            z-index: -1;
-            transition: height 0.15s steps(4); /* Steps added for raw feel */
+            bottom: 0; left: 50%;
+            width: 0; height: 1.5px;
+            background-color: var(--accent-orange);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        nav a:hover::before { height: 10px; }
-        nav a:hover { color: #fff; }
+        nav a:hover::after { width: 100%; left: 0; }
 
         /* --- Grid Layout --- */
         #main {
@@ -128,9 +123,10 @@
         .thumb:hover img { transform: scale(1.05); }
 
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
-        .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
+        /* Shift #8: Updated to #777 for foundational accessibility contrast */
+        .thumb-info p { font-size: 0.6rem; color: #777; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
-        /* --- Modal System (Freeze & Settle) --- */
+        /* --- Modal System --- */
         #modal-overlay {
             position: fixed; inset: 0; width: 100%; height: 100dvh; 
             z-index: 9999; background: #ffffff; display: none;
@@ -188,7 +184,7 @@
             border: none; border-radius: 100px; cursor: pointer;
             transition: transform 0.3s ease, background 0.3s ease;
         }
-        .agency-close-btn span { position: absolute; right: 20px; font-size: 0.8rem; }
+        .agency-close-btn span { position: absolute; right: 20px; font-size: 0.8rem; text-indent: 0; }
         .agency-close-btn:hover { transform: translateY(-4px); background: var(--accent-orange); }
 
         /* --- Footer --- */
@@ -270,7 +266,6 @@
     </footer>
 
     <script>
-        // THE PROJECT DATA (Engineered Visual Pacing Order)
         const projects = [
             { id:0, title: 'Koffee Kart', cat: 'Identity • Logo', thumb: 'images/thumbs/00.jpg', hero: 'images/hero/00.jpg', text: 'Official brand identity system engineered for Koffee Kart.', dim: 'VECTOR', year: '2025' },
             { id:1, title: 'SkinCartel', cat: 'Motion Graphics • VFX', thumb: 'images/thumbs/07.gif', hero: 'images/hero/07.gif', text: 'High-fidelity motion design and visual effects created for luxury branding.', dim: '1080 x 1080', year: '2025' },
@@ -289,7 +284,6 @@
 
         let currentIdx = 0;
 
-        // Render Grid On Load
         const main = document.getElementById('main');
         projects.forEach((p, idx) => {
             const article = document.createElement('article');
@@ -302,7 +296,6 @@
             main.appendChild(article);
         });
 
-        // Modal Logic
         function openProject(idx) {
             currentIdx = idx;
             const p = projects[idx];
@@ -329,7 +322,6 @@
 
         function nextProject() {
             let nextIdx = (currentIdx + 1) % projects.length;
-            // Immediate transition for cinematic feel
             openProject(nextIdx);
         }
 
