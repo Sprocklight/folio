@@ -68,7 +68,7 @@
         .logo {
             font-family: 'Inter', sans-serif; 
             font-weight: 700; 
-            display: flex; /* True flex centering for the optical baseline */
+            display: flex; 
             align-items: center; 
             text-decoration: none;
             color: var(--text-main);
@@ -82,7 +82,7 @@
             background-color: var(--accent-orange); 
             width: 0.35em; height: 0.35em; 
             margin-left: 0.2em; 
-            transform: translateY(0.18em); /* Your custom lock-in */
+            transform: translateY(0.18em); 
         }
 
         nav { display: flex; align-items: center; height: 100%; }
@@ -92,10 +92,9 @@
             text-decoration: none; color: var(--text-main); font-weight: 600; 
             font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; 
             letter-spacing: 1.5px; display: inline-block;
-            padding-bottom: 4px; /* Gives the micro-interaction room to breathe */
+            padding-bottom: 4px; 
         }
 
-        /* Elegant Micro-interaction replacing the Brutalist block */
         nav a::after {
             content: '';
             position: absolute;
@@ -123,7 +122,6 @@
         .thumb:hover img { transform: scale(1.05); }
 
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
-        /* Shift #8: Updated to #777 for foundational accessibility contrast */
         .thumb-info p { font-size: 0.6rem; color: #777; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
         /* --- Modal System --- */
@@ -144,6 +142,22 @@
             border-radius: 100px; display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 15px 45px rgba(0,0,0,0.08);
         }
+
+        /* --- THE RESTORED TOP CLOSE TRIGGER --- */
+        .close-trigger {
+            background: none; border: none; cursor: pointer; width: 20px; height: 20px;
+            position: relative; display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s ease; /* Premium hover rotation */
+        }
+        .close-trigger::before, .close-trigger::after {
+            content: ''; position: absolute; width: 100%; height: 1.5px; background-color: var(--text-main);
+            transition: background-color 0.3s ease;
+        }
+        .close-trigger::before { transform: rotate(45deg); }
+        .close-trigger::after { transform: rotate(-45deg); }
+        
+        .close-trigger:hover { transform: rotate(90deg); }
+        .close-trigger:hover::before, .close-trigger:hover::after { background-color: var(--accent-orange); }
 
         .modal-hero-container { width: 100%; height: 80dvh; position: relative; background: #f8f8f8; padding: 25px; overflow: hidden; }
         .modal-main-img { 
