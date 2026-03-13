@@ -22,20 +22,30 @@
             --radius: 8px; /* Dribbble Radius */
         }
 
-        /* --- Global Reset --- */
+        /* --- Global Reset & The Scrollbar Fix --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 
-        html, body { height: 100%; background-color: var(--bg-color); margin: 0; padding: 0; }
+        html { 
+            height: 100%; 
+            background-color: var(--bg-color); 
+            /* THE FIX: This stops the page from shifting left/right when the modal opens */
+            scrollbar-gutter: stable; 
+        }
 
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
             overflow-x: hidden;
             background-attachment: fixed;
+            margin: 0; 
+            padding: 0;
+            height: 100%;
         }
 
-        body.modal-open { overflow: hidden; position: fixed; width: 100%; }
-        body.modal-open #header { display: none !important; }
+        body.modal-open { 
+            overflow: hidden; 
+            /* We removed the 'hide header' rule here so it stops glitching on close */
+        }
 
         /* --- Aligned Wide Pill Home Header --- */
         #header {
@@ -60,12 +70,7 @@
             transform: translateY(calc(-100% - 50px));
         }
 
-        #header h1 { 
-            margin: 0; 
-            display: flex; 
-            align-items: center; 
-            line-height: 1; 
-        }
+        #header h1 { margin: 0; display: flex; align-items: center; line-height: 1; }
 
         /* --- THE LOGO LOCK-UP --- */
         .logo {
@@ -88,25 +93,15 @@
             height: 0.35em; 
             margin-left: 0.2em; 
             flex-shrink: 0;
-            transform: translateY(0.18em);
+            transform: translateY(0.18em); /* Your custom tweak applied */
         }
 
-        nav { 
-            display: flex; 
-            align-items: center; 
-            line-height: 1; 
-        }
+        nav { display: flex; align-items: center; line-height: 1; }
 
         nav a { 
-            text-decoration: none; 
-            color: var(--text-main); 
-            font-weight: 600; 
-            font-size: 0.6rem; 
-            text-transform: uppercase; 
-            margin-left: 2rem; 
-            letter-spacing: 1.5px;
-            line-height: 1;
-            display: inline-block;
+            text-decoration: none; color: var(--text-main); font-weight: 600; 
+            font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; 
+            letter-spacing: 1.5px; line-height: 1; display: inline-block;
         }
 
         /* --- Aligned Modal Header --- */
@@ -121,9 +116,7 @@
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-radius: 100px;
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
+            display: flex; justify-content: space-between; align-items: center;
             box-shadow: 0 15px 45px rgba(0,0,0,0.08);
         }
 
@@ -139,8 +132,7 @@
 
         /* --- Home Grid (4:3 Dribbble Ratio) --- */
         #main {
-            padding-top: 150px; 
-            display: grid; grid-template-columns: repeat(4, 1fr);
+            padding-top: 150px; display: grid; grid-template-columns: repeat(4, 1fr);
             background: #ffffff; gap: 1px; 
         }
 
@@ -151,9 +143,7 @@
         .thumb:hover { background: #fafafa; }
 
         .thumb .image-wrap { 
-            width: 100%; aspect-ratio: 4/3; 
-            overflow: hidden; margin-bottom: 1.8rem; 
-            border-radius: var(--radius); 
+            width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-bottom: 1.8rem; border-radius: var(--radius); 
         }
         .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
         .thumb:hover img { transform: scale(1.05); }
@@ -161,12 +151,11 @@
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
         .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
-        /* --- Modal Hero (Cinematic Settle & Drift with Freeze Fix) --- */
+        /* --- Modal Hero (Cinematic Settle & Drift) --- */
         #modal-overlay {
             position: fixed; inset: 0; width: 100%; height: 100dvh; 
             z-index: 9999; background: #ffffff; display: none;
-            opacity: 0; 
-            flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch;
+            opacity: 0; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
         
@@ -174,42 +163,31 @@
 
         .modal-hero-container { 
             width: 100%; height: 80dvh; position: relative;
-            background: #f8f8f8; padding: 25px; 
-            overflow: hidden; 
+            background: #f8f8f8; padding: 25px; overflow: hidden; 
         }
 
         .modal-main-img { 
             position: absolute; top: 25px; left: 25px;
             width: calc(100% - 50px); height: calc(100% - 50px); 
-            object-fit: cover; display: block;
-            border-radius: 12px;
+            object-fit: cover; display: block; border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-            transform: scale(1.04);
-            opacity: 0;
-            /* 0.8s lock prevents any jumping during the fade out */
+            transform: scale(1.04); opacity: 0;
             transition: opacity 0.4s ease, transform 0.01s linear 0.8s;
         }
         
         #modal-overlay.is-visible .modal-main-img {
-            transform: scale(1);
-            opacity: 1;
-            /* The cinematic settle on the way IN */
+            transform: scale(1); opacity: 1;
             transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
 
-        /* --- Content Area --- */
         .modal-content-area { 
             width: 100%; max-width: 1100px; margin: 0 auto; padding: 4rem 5% 10rem;
-            opacity: 0; 
-            transform: translateY(20px); 
-            /* 0.8s lock prevents any jumping during the fade out */
+            opacity: 0; transform: translateY(20px); 
             transition: opacity 0.3s ease, transform 0.01s linear 0.8s;
         }
         
         #modal-overlay.is-visible .modal-content-area { 
-            opacity: 1; 
-            transform: translateY(0); 
-            /* The delayed drift on the way IN */
+            opacity: 1; transform: translateY(0); 
             transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.8s ease 0.1s;
         }
 
@@ -359,6 +337,7 @@
                 <p style="margin-top:2.5rem; opacity:0.4; font-size:0.65rem; text-transform: uppercase; letter-spacing: 2px;">© 2026 SPROCKLIGHT MNL</p>
             </div>
             <div>
+                <h3 style="font-size: 0.65rem; text-transform: uppercase; letter-spacing: 2px; opacity: 0.5; margin-bottom: 1.5rem;">Let's Talk</h3>
                 <a href="mailto:anthony.juco@gmail.com" class="contact-link">anthony.juco@gmail.com <span>→</span></a>
                 <a href="https://www.linkedin.com/company/sprocklightmnl/" target="_blank" class="contact-link">LinkedIn <span>↗</span></a>
             </div>
@@ -379,20 +358,14 @@
             document.body.classList.add('modal-open');
             overlay.scrollTop = 0;
             
-            // Forces the browser to recognize the display change before animating
             void overlay.offsetWidth; 
-            
-            // Triggers the CSS settle/drift transitions
             overlay.classList.add('is-visible');
         }
 
         function closeProject() {
             const overlay = document.getElementById('modal-overlay');
-            
-            // Starts the fade out
             overlay.classList.remove('is-visible');
             
-            // 600ms safety buffer guarantees absolute invisibility before layout shifts
             setTimeout(() => {
                 overlay.style.display = 'none';
                 document.body.classList.remove('modal-open');
