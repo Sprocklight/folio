@@ -40,10 +40,11 @@
         /* --- Aligned Wide Pill Home Header --- */
         #header {
             position: fixed;
-            top: env(safe-area-inset-top, 20px);
+            /* THE FIX: Guarantees 30px of floating space on desktop */
+            top: calc(env(safe-area-inset-top, 0px) + 30px); 
             left: 2%; right: 2%; width: 96%;
             z-index: 1000;
-            padding: 1.2rem 3rem; /* Symmetrical vertical padding */
+            padding: 1.2rem 3rem; 
             background: var(--header-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
@@ -185,7 +186,7 @@
             opacity: 0; transform: translateY(30px);
             transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
         }
-        .modal-content-area.animate-in { opacity: 1; transform: translateY(0); }
+        .modal-content-area.animate-in { opacity: 1; transform: translateY(0); }@
 
         .lower-left-meta {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
@@ -365,6 +366,7 @@
     </script>
 </body>
 </html>
+
 
 
 
