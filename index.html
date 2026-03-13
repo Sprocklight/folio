@@ -186,12 +186,16 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.04);
             transform: scale(1.04);
             opacity: 0;
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+            
+            /* THE FIX: Wait 0.5s before resetting the scale on close so it doesn't move */
+            transition: transform 0s 0.5s, opacity 0.4s ease;
         }
         
         #modal-overlay.is-visible .modal-main-img {
             transform: scale(1);
             opacity: 1;
+            /* The sleek settle effect only plays on the way IN */
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
         }
 
         /* --- Content Area --- */
@@ -199,13 +203,16 @@
             width: 100%; max-width: 1100px; margin: 0 auto; padding: 4rem 5% 10rem;
             opacity: 0; 
             transform: translateY(20px); 
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            transition-delay: 0.1s; 
+            
+            /* THE FIX: Wait 0.5s before resetting the position on close */
+            transition: transform 0s 0.5s, opacity 0.3s ease;
         }
         
         #modal-overlay.is-visible .modal-content-area { 
             opacity: 1; 
             transform: translateY(0); 
+            /* Plays the drift effect only on the way IN */
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.8s ease 0.1s;
         }
 
         .lower-left-meta {
@@ -415,3 +422,4 @@
     </script>
 </body>
 </html>
+
