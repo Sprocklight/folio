@@ -13,22 +13,22 @@
     <style>
         :root {
             --bg-color: #ffffff; 
-            --text-main: #001A70; /* Strategic Navy */
-            --accent-orange: #FF4500; /* Original Brand Orange */
+            --text-main: #001A70; 
+            --accent-orange: #FF4500; 
             --text-body: #2d3436;
             --line-color: #f2f2f2; 
             --header-bg: rgba(242, 242, 245, 0.9); 
             --glass-blur: blur(25px) saturate(140%);
-            --radius: 8px; /* Dribbble Radius */
+            --radius: 8px; 
         }
 
-        /* --- Global Reset & The Scrollbar Fix --- */
+        /* --- Global Reset & Scrollbar Stability --- */
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
 
         html { 
             height: 100%; 
             background-color: var(--bg-color); 
-            scrollbar-gutter: stable; /* Prevents the layout jump */
+            scrollbar-gutter: stable; 
         }
 
         body {
@@ -36,16 +36,12 @@
             color: var(--text-main);
             overflow-x: hidden;
             background-attachment: fixed;
-            margin: 0; 
-            padding: 0;
             height: 100%;
         }
 
-        body.modal-open { 
-            overflow: hidden; 
-        }
+        body.modal-open { overflow: hidden; }
 
-        /* --- Aligned Wide Pill Home Header --- */
+        /* --- Header & Navigation --- */
         #header {
             position: fixed;
             top: calc(env(safe-area-inset-top, 0px) + 30px);
@@ -64,13 +60,8 @@
             transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
-        #header.hidden {
-            transform: translateY(calc(-100% - 50px));
-        }
+        #header.hidden { transform: translateY(calc(-100% - 50px)); }
 
-        #header h1 { margin: 0; display: flex; align-items: center; line-height: 1; }
-
-        /* --- THE LOGO LOCK-UP --- */
         .logo {
             font-family: 'Inter', sans-serif; 
             font-weight: 700; 
@@ -94,41 +85,13 @@
             transform: translateY(0.18em); 
         }
 
-        nav { display: flex; align-items: center; line-height: 1; }
-
         nav a { 
             text-decoration: none; color: var(--text-main); font-weight: 600; 
             font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; 
             letter-spacing: 1.5px; line-height: 1; display: inline-block;
         }
 
-        /* --- Aligned Modal Header --- */
-        .modal-header {
-            position: fixed;
-            top: calc(env(safe-area-inset-top, 0px) + 30px);
-            left: 50%; transform: translateX(-50%);
-            width: 85%; max-width: 1000px;
-            z-index: 10005;
-            padding: 0.85rem 2.2rem;
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border-radius: 100px;
-            display: flex; justify-content: space-between; align-items: center;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.08);
-        }
-
-        .close-trigger {
-            background: none; border: none; cursor: pointer; width: 20px; height: 20px;
-            position: relative; display: flex; align-items: center; justify-content: center;
-        }
-        .close-trigger::before, .close-trigger::after {
-            content: ''; position: absolute; width: 100%; height: 1.5px; background-color: var(--text-main);
-        }
-        .close-trigger::before { transform: rotate(45deg); }
-        .close-trigger::after { transform: rotate(-45deg); }
-
-        /* --- Home Grid --- */
+        /* --- Grid Layout (Visual Pacing) --- */
         #main {
             padding-top: 150px; display: grid; grid-template-columns: repeat(4, 1fr);
             background: #ffffff; gap: 1px; 
@@ -139,118 +102,97 @@
             border-bottom: 1px solid var(--line-color); border-right: 1px solid var(--line-color);
         }
         .thumb:hover { background: #fafafa; }
-
-        .thumb .image-wrap { 
-            width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-bottom: 1.8rem; border-radius: var(--radius); 
-        }
+        .thumb .image-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-bottom: 1.8rem; border-radius: var(--radius); }
         .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
         .thumb:hover img { transform: scale(1.05); }
 
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
         .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
-        /* --- Modal Hero (Cinematic Settle & Drift) --- */
+        /* --- Modal System (Freeze & Settle) --- */
         #modal-overlay {
             position: fixed; inset: 0; width: 100%; height: 100dvh; 
             z-index: 9999; background: #ffffff; display: none;
             opacity: 0; flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch;
             transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        
         #modal-overlay.is-visible { opacity: 1; }
 
-        .modal-hero-container { 
-            width: 100%; height: 80dvh; position: relative;
-            background: #f8f8f8; padding: 25px; overflow: hidden; 
+        .modal-header {
+            position: fixed; top: calc(env(safe-area-inset-top, 0px) + 30px);
+            left: 50%; transform: translateX(-50%);
+            width: 85%; max-width: 1000px;
+            z-index: 10005; padding: 0.85rem 2.2rem;
+            background: rgba(255, 255, 255, 0.9); backdrop-filter: var(--glass-blur);
+            border-radius: 100px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.08);
         }
 
+        .modal-hero-container { width: 100%; height: 80dvh; position: relative; background: #f8f8f8; padding: 25px; overflow: hidden; }
         .modal-main-img { 
-            position: absolute; top: 25px; left: 25px;
-            width: calc(100% - 50px); height: calc(100% - 50px); 
-            object-fit: cover; display: block; border-radius: 12px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-            transform: scale(1.04); opacity: 0;
+            position: absolute; top: 25px; left: 25px; width: calc(100% - 50px); height: calc(100% - 50px); 
+            object-fit: cover; border-radius: 12px; transform: scale(1.04); opacity: 0;
             transition: opacity 0.4s ease, transform 0.01s linear 0.8s;
         }
-        
-        #modal-overlay.is-visible .modal-main-img {
-            transform: scale(1); opacity: 1;
-            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
-        }
+        #modal-overlay.is-visible .modal-main-img { transform: scale(1); opacity: 1; transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease; }
 
         .modal-content-area { 
             width: 100%; max-width: 1100px; margin: 0 auto; padding: 4rem 5% 10rem;
-            opacity: 0; transform: translateY(20px); 
-            transition: opacity 0.3s ease, transform 0.01s linear 0.8s;
+            opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.01s linear 0.8s;
+            text-align: center; /* Ensures the button and text stay centered */
         }
-        
-        #modal-overlay.is-visible .modal-content-area { 
-            opacity: 1; transform: translateY(0); 
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.8s ease 0.1s;
-        }
+        #modal-overlay.is-visible .modal-content-area { opacity: 1; transform: translateY(0); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.8s ease 0.1s; }
 
-        .lower-left-meta {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
-            border-left: 2px solid var(--text-main); padding-left: 30px; margin-bottom: 3.5rem;
-        }
-
+        .lower-left-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; border-left: 2px solid var(--text-main); padding-left: 30px; margin-bottom: 3.5rem; text-align: left; }
         .meta-label { font-size: 0.55rem; font-weight: 800; color: #ccc; text-transform: uppercase; margin-bottom: 8px; }
         .meta-value { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
 
-        .modal-desc-wrap h2 { 
-            font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7.5vw, 6rem); 
-            font-weight: 400; line-height: 0.85; color: var(--text-main); letter-spacing: -3px; margin-bottom: 2rem;
-        }
-        .modal-desc-wrap p { font-size: 1.4rem; line-height: 1.5; color: var(--text-body); max-width: 820px; font-weight: 400; }
+        .modal-desc-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7.5vw, 6rem); font-weight: 400; line-height: 0.85; color: var(--text-main); letter-spacing: -3px; margin-bottom: 2rem; }
+        .modal-desc-wrap p { font-size: 1.4rem; line-height: 1.5; color: var(--text-body); max-width: 820px; margin: 0 auto; font-weight: 400; }
 
-        /* --- Premium CTA Button --- */
+        /* --- THE FIXED CLOSE BUTTON --- */
         .agency-close-btn {
             display: inline-flex; align-items: center; justify-content: center;
             position: relative; 
-            margin-top: 5rem; padding: 1.2rem 4rem; 
+            margin-top: 5rem; 
+            width: 280px; /* Fixed width prevents "odd" resizing */
+            height: 56px;
             background: var(--text-main); color: #ffffff;
             font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.65rem;
-            text-transform: uppercase; 
-            letter-spacing: 2px;
-            text-indent: 2px; 
+            text-transform: uppercase; letter-spacing: 2px;
+            text-indent: 2px; /* Offsets the letter-spacing of the last 'T' */
             border: none; border-radius: 100px; cursor: pointer;
             transition: transform 0.3s ease, background 0.3s ease;
         }
         
+        /* Absolute X prevents it from pushing the text to the left */
         .agency-close-btn span { 
             position: absolute; 
-            right: 2.2rem; 
-            font-size: 0.8rem; 
+            right: 24px; 
+            font-size: 0.9rem; 
             text-indent: 0; 
+            font-weight: 400;
         }
-        
         .agency-close-btn:hover { transform: translateY(-4px); background: var(--accent-orange); }
 
         /* --- Footer --- */
         #footer { padding: 10rem 5%; background: var(--text-main); color: #fff; }
         .footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: end; }
         .footer-logo-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.85; letter-spacing: -2px; }
-        .contact-link {
-            color: #fff; text-decoration: none; font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; 
-            font-weight: 400; display: block; margin-bottom: 0.8rem; transition: opacity 0.3s ease;
-        }
+        .contact-link { color: #fff; text-decoration: none; font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; display: block; margin-bottom: 0.8rem; transition: opacity 0.3s ease; }
 
         /* --- Mobile Hub --- */
         @media (max-width: 768px) {
             #header, .modal-header { width: 94%; padding: 0.8rem 1.2rem; top: calc(env(safe-area-inset-top, 0px) + 15px); }
             #header h1 a { font-size: 0.9rem; }
             nav a { margin-left: 1.2rem; font-size: 0.65rem; }
-
             #main { grid-template-columns: 1fr; padding-top: 100px; }
             .thumb { padding: 2.5rem 1.5rem; } 
-            
             .modal-hero-container { height: 60dvh; padding: 15px; }
-            .modal-main-img { width: calc(100% - 30px); height: calc(100% - 30px); top: 15px; left: 15px; border-radius: 8px; }
-            .lower-left-meta { grid-template-columns: 1fr; gap: 20px; }
+            .modal-main-img { width: calc(100% - 30px); height: calc(100% - 30px); top: 15px; left: 15px; }
+            .lower-left-meta { grid-template-columns: 1fr; gap: 20px; text-align: left; }
             .footer-grid { grid-template-columns: 1fr; }
-            
-            .agency-close-btn { width: 100%; padding: 1.2rem 0; }
-            .agency-close-btn span { right: 1.5rem; }
+            .agency-close-btn { width: 100%; max-width: 400px; }
         }
     </style>
 </head>
@@ -265,71 +207,27 @@
     </header>
 
     <div id="main">
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/md.jpg', 'images/hero/md.jpg', 'Modern aesthetics for a premium Interior Design agency.', '1600 x 1200', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/md.jpg" alt="Interior Design"></div>
-            <div class="thumb-info"><h2>Interior Design Website</h2><p>Website • 2026</p></div>
-        </article>
-        
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'images/hero/01.jpg', 'High-energy creatives for a modern fashion banner.', '1600 x 1200', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/01.jpg" alt="Fashion Banner"></div>
-            <div class="thumb-info"><h2>Fashion Website Banner</h2><p>Creatives • 2026</p></div>
-        </article>
-        
-        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'images/hero/07.gif', 'High-fidelity motion design created for luxury branding.', '1080 x 1080', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel Motion"></div>
-            <div class="thumb-info"><h2>SkinCartel</h2><p>Motion • 2025</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'images/hero/02.jpg', 'Creative direction and full-scale photoshoot execution.', '3000 x 2000', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine Torcher"></div>
-            <div class="thumb-info"><h2>Turbine Torcher</h2><p>Creatives • 2026</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Minimal Layout.', 'Editorial Design', 'images/thumbs/03.jpg', 'images/hero/03.jpg', 'Digital editing for the Jaunter Airpods collection.', 'A4 PRINT', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/03.jpg" alt="Jaunter Collection"></div>
-            <div class="thumb-info"><h2>Jaunter Collection</h2><p>Editorial • 2025</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Web Architecture.', 'Full Development', 'images/thumbs/10.jpg', 'images/hero/10.jpg', 'Digital transformation of The Emerald Events Place.', '2560 x 1440', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/10.jpg" alt="Events Place"></div>
-            <div class="thumb-info"><h2>Events Place Website</h2><p>Website Dev • SEO</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Social Engineering.', 'Campaign Design', 'images/thumbs/06.jpg', 'images/hero/06.jpg', 'Targeted campaign assets for Chef Maria.', '1200 x 628', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/06.jpg" alt="Chef Maria"></div>
-            <div class="thumb-info"><h2>Chef Maria</h2><p>Social • AD</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Material Showcase.', 'Product Design', 'images/thumbs/08.gif', 'images/hero/08.gif', 'Digital asset creation for JN Leather textures.', '1080 x 1080', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/08.gif" alt="JN Leather"></div>
-            <div class="thumb-info"><h2>JN Leather</h2><p>Product • Visuals</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Interface V1.', 'UI Architecture', 'images/thumbs/09.jpg', 'images/hero/09.jpg', 'Original architecture for the Jaunter ecosystem.', '1440 x 900', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/09.jpg" alt="Jaunter V1"></div>
-            <div class="thumb-info"><h2>Jaunter V1</h2><p>UI • UX</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Vertical Impact.', 'Advertising', 'images/thumbs/05.jpg', 'images/hero/05.jpg', 'Portrait-optimized Pinterest campaign for JHome.', '1080 x 1920', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/05.jpg" alt="JHome Ads"></div>
-            <div class="thumb-info"><h2>JHome Ads</h2><p>Pinterest • Mobile</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Corporate ID.', 'Brand Identity', 'images/thumbs/00.jpg', 'images/hero/00.jpg', 'Official brand system for Koffee Kart.', 'VECTOR', '2025')">
+        <article class="thumb" onclick="openProject('Brand Strategy.', 'Corporat ID', 'images/thumbs/00.jpg', 'images/hero/00.jpg', 'Official brand identity system engineered for Koffee Kart.', 'VECTOR', '2025')">
             <div class="image-wrap"><img src="images/thumbs/00.jpg" alt="Koffee Kart"></div>
             <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Logo</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('Future Iteration.', 'Interface Design', 'images/thumbs/13.gif', 'images/hero/13.gif', 'High-energy social campaign for Jaunter Q3.', '1080 x 1350', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/13.gif" alt="Jaunter V3"></div>
-            <div class="thumb-info"><h2>Jaunter V3</h2><p>Motion • Q3</p></div>
+        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'images/hero/07.gif', 'High-fidelity motion design and visual effects created for luxury branding.', '1080 x 1080', '2025')">
+            <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel"></div>
+            <div class="thumb-info"><h2>SkinCartel</h2><p>Motion Graphics • VFX</p></div>
+        </article>
+        
+        <article class="thumb" onclick="openProject('Visual Expertise.', 'Digital Precision', 'images/thumbs/md.jpg', 'images/hero/md.jpg', 'Modern digital aesthetics engineered for a premium Interior Design agency.', '1600 x 1200', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/md.jpg" alt="Madeleine Bettridge"></div>
+            <div class="thumb-info"><h2>Madeleine Bettridge</h2><p>Agency Website • 2026</p></div>
         </article>
 
-        <article class="thumb" onclick="openProject('Visual Language.', 'Brand Assets', 'images/thumbs/04.jpg', 'images/hero/04.jpg', 'Secondary interface assets for consistent branding.', '1920 x 800', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/04.jpg" alt="SkinCartel ID"></div>
-            <div class="thumb-info"><h2>SkinCartel ID</h2><p>Assets • Digital</p></div>
+        <article class="thumb" onclick="openProject('Creative Direction.', 'Photography campaign', 'images/thumbs/02.jpg', 'images/hero/02.jpg', 'Creative direction and full-scale photography photoshoot execution.', '3000 x 2000', '2026')">
+            <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine Torcher"></div>
+            <div class="thumb-info"><h2>Turbine Torcher</h2><p>Photography campaign</p></div>
         </article>
-    </div>
+        
+        </div>
 
     <div id="modal-overlay">
         <div class="modal-header">
@@ -373,7 +271,6 @@
     </footer>
 
     <script>
-        // --- Modal & History Logic ---
         function openProject(title, category, thumbImg, heroImg, text, dim, year) {
             document.getElementById('modal-title').innerText = title;
             document.getElementById('modal-cat').innerText = category;
@@ -386,9 +283,7 @@
             overlay.style.display = 'flex';
             document.body.classList.add('modal-open');
             overlay.scrollTop = 0;
-            
             history.pushState({ modalOpen: true }, '', '#project');
-            
             void overlay.offsetWidth; 
             overlay.classList.add('is-visible');
         }
@@ -396,7 +291,6 @@
         function triggerCloseAnimation() {
             const overlay = document.getElementById('modal-overlay');
             if (!overlay.classList.contains('is-visible')) return; 
-            
             overlay.classList.remove('is-visible');
             setTimeout(() => {
                 overlay.style.display = 'none';
@@ -406,38 +300,19 @@
 
         function closeProjectHandler() {
             triggerCloseAnimation();
-            if (window.location.hash === '#project') {
-                history.back(); 
-            }
+            if (window.location.hash === '#project') history.back();
         }
 
-        window.addEventListener('popstate', (e) => {
-            if (document.body.classList.contains('modal-open')) {
-                triggerCloseAnimation();
-            }
-        });
+        window.addEventListener('popstate', (e) => { if (document.body.classList.contains('modal-open')) triggerCloseAnimation(); });
+        window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && document.body.classList.contains('modal-open')) closeProjectHandler(); });
 
-        window.addEventListener('keydown', (e) => { 
-            if(e.key === 'Escape' && document.body.classList.contains('modal-open')) {
-                closeProjectHandler();
-            } 
-        });
-
-        // --- Smart Header Scroll ---
         let lastScrollTop = 0;
-        const header = document.getElementById('header');
-
         window.addEventListener('scroll', () => {
             if (document.body.classList.contains('modal-open')) return;
-
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > 50) {
-                header.classList.add('hidden');
-            } else if (scrollTop < lastScrollTop) {
-                header.classList.remove('hidden');
-            }
-            
+            const header = document.getElementById('header');
+            if (scrollTop > lastScrollTop && scrollTop > 50) header.classList.add('hidden');
+            else if (scrollTop < lastScrollTop) header.classList.remove('hidden');
             lastScrollTop = scrollTop;
         });
     </script>
