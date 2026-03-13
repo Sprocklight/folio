@@ -13,8 +13,8 @@
     <style>
         :root {
             --bg-color: #ffffff; 
-            --text-main: #001A70; 
-            --accent-orange: #FF4500; 
+            --text-main: #001A70; /* Strategic Navy */
+            --accent-orange: #FF4500; /* Original Brand Orange */
             --text-body: #2d3436;
             --line-color: #f2f2f2; 
             --header-bg: rgba(242, 242, 245, 0.9); 
@@ -28,7 +28,7 @@
         html { 
             height: 100%; 
             background-color: var(--bg-color); 
-            scrollbar-gutter: stable; 
+            scrollbar-gutter: stable; /* Crucial for Desktop close nudge */
         }
 
         body {
@@ -41,13 +41,14 @@
 
         body.modal-open { overflow: hidden; }
 
-        /* --- Header & Navigation (Fixed Alignment) --- */
+        /* --- Header & Navigation (Brutalist Style) --- */
         #header {
             position: fixed;
             top: calc(env(safe-area-inset-top, 0px) + 30px);
             left: 2%; right: 2%; width: 96%;
             z-index: 1000;
-            padding: 1.2rem 3rem; 
+            padding: 0 3rem; 
+            height: 70px; /* Fixed height for absolute alignment */
             background: var(--header-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
@@ -56,13 +57,11 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
             display: flex; 
             justify-content: space-between; 
-            align-items: center; /* Core vertical alignment */
+            align-items: center; 
             transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
         }
 
         #header.hidden { transform: translateY(calc(-100% - 100px)); }
-
-        #header h1 { margin: 0; display: flex; align-items: center; line-height: 1; height: 100%; }
 
         .logo {
             font-family: 'Inter', sans-serif; 
@@ -74,26 +73,44 @@
             font-size: 1.1rem; 
             text-transform: uppercase; 
             letter-spacing: -0.02em; 
-            line-height: 1; /* Locked line height */
+            line-height: 1; 
         }
 
         .logo span {
             display: inline-block;
             background-color: var(--accent-orange); 
-            width: 0.35em; 
-            height: 0.35em; 
+            width: 0.35em; height: 0.35em; 
             margin-left: 0.2em; 
-            flex-shrink: 0;
             transform: translateY(0.18em); 
         }
 
         nav { display: flex; align-items: center; height: 100%; }
 
         nav a { 
-            text-decoration: none; color: var(--text-main); font-weight: 600; 
-            font-size: 0.6rem; text-transform: uppercase; margin-left: 2rem; 
-            letter-spacing: 1.5px; line-height: 1; display: inline-block;
+            position: relative;
+            text-decoration: none; 
+            color: var(--text-main); 
+            font-weight: 700; 
+            font-size: 0.6rem; 
+            text-transform: uppercase; 
+            margin-left: 2.5rem; 
+            letter-spacing: 1.5px;
+            z-index: 1;
         }
+
+        /* Brutalist Hover: A solid block that appears behind the text */
+        nav a::before {
+            content: '';
+            position: absolute;
+            left: -4px; right: -4px; bottom: 0;
+            height: 0;
+            background: var(--accent-orange);
+            z-index: -1;
+            transition: height 0.15s steps(4); /* Steps added for raw feel */
+        }
+
+        nav a:hover::before { height: 10px; }
+        nav a:hover { color: #fff; }
 
         /* --- Grid Layout --- */
         #main {
@@ -106,14 +123,14 @@
             border-bottom: 1px solid var(--line-color); border-right: 1px solid var(--line-color);
         }
         .thumb:hover { background: #fafafa; }
-        .thumb .image-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-bottom: 1.8rem; border-radius: var(--radius); }
+        .thumb .image-wrap { width: 100%; aspect-ratio: 4/3; overflow: hidden; margin-bottom: 1.8rem; border-radius: var(--radius); background: #f8f8f8; }
         .thumb img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s cubic-bezier(0.19, 1, 0.22, 1); }
         .thumb:hover img { transform: scale(1.05); }
 
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
         .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
-        /* --- Modal System --- */
+        /* --- Modal System (Freeze & Settle) --- */
         #modal-overlay {
             position: fixed; inset: 0; width: 100%; height: 100dvh; 
             z-index: 9999; background: #ffffff; display: none;
@@ -132,16 +149,6 @@
             box-shadow: 0 15px 45px rgba(0,0,0,0.08);
         }
 
-        .close-trigger {
-            background: none; border: none; cursor: pointer; width: 20px; height: 20px;
-            position: relative; display: flex; align-items: center; justify-content: center;
-        }
-        .close-trigger::before, .close-trigger::after {
-            content: ''; position: absolute; width: 100%; height: 1.5px; background-color: var(--text-main);
-        }
-        .close-trigger::before { transform: rotate(45deg); }
-        .close-trigger::after { transform: rotate(-45deg); }
-
         .modal-hero-container { width: 100%; height: 80dvh; position: relative; background: #f8f8f8; padding: 25px; overflow: hidden; }
         .modal-main-img { 
             position: absolute; top: 25px; left: 25px; width: calc(100% - 50px); height: calc(100% - 50px); 
@@ -153,7 +160,6 @@
         .modal-content-area { 
             width: 100%; max-width: 1100px; margin: 0 auto; padding: 4rem 5% 10rem;
             opacity: 0; transform: translateY(20px); transition: opacity 0.3s ease, transform 0.01s linear 0.8s;
-            text-align: left; 
         }
         #modal-overlay.is-visible .modal-content-area { opacity: 1; transform: translateY(0); transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s, opacity 0.8s ease 0.1s; }
 
@@ -162,20 +168,27 @@
         .meta-value { font-size: 0.75rem; font-weight: 600; text-transform: uppercase; }
 
         .modal-desc-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7.5vw, 6rem); font-weight: 400; line-height: 0.85; color: var(--text-main); letter-spacing: -3px; margin-bottom: 2rem; }
-        .modal-desc-wrap p { font-size: 1.4rem; line-height: 1.5; color: var(--text-body); max-width: 820px; font-weight: 400; }
+        .modal-desc-wrap p { font-size: 1.4rem; line-height: 1.5; color: var(--text-body); max-width: 650px; font-weight: 400; }
 
-        /* --- THE FIXED CLOSE BUTTON --- */
-        .btn-container { width: 100%; display: flex; justify-content: center; }
+        /* --- Next Project & Close Controls --- */
+        .modal-controls { display: flex; align-items: center; justify-content: space-between; margin-top: 6rem; border-top: 1px solid var(--line-color); padding-top: 4rem; }
+        
+        .next-project-link {
+            font-family: 'Cormorant Garamond', serif; font-size: 3rem; text-decoration: none; color: var(--text-main);
+            transition: transform 0.3s ease;
+        }
+        .next-project-link:hover { transform: translateX(10px); color: var(--accent-orange); }
+
         .agency-close-btn {
             display: inline-flex; align-items: center; justify-content: center;
-            position: relative; margin-top: 5rem; width: 280px; height: 56px;
+            position: relative; width: 240px; height: 56px;
             background: var(--text-main); color: #ffffff;
-            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.65rem;
-            text-transform: uppercase; letter-spacing: 2px; text-indent: 2px; 
+            font-family: 'Inter', sans-serif; font-weight: 700; font-size: 0.6rem;
+            text-transform: uppercase; letter-spacing: 2px; text-indent: 2px;
             border: none; border-radius: 100px; cursor: pointer;
             transition: transform 0.3s ease, background 0.3s ease;
         }
-        .agency-close-btn span { position: absolute; right: 24px; font-size: 0.9rem; text-indent: 0; font-weight: 400; }
+        .agency-close-btn span { position: absolute; right: 20px; font-size: 0.8rem; }
         .agency-close-btn:hover { transform: translateY(-4px); background: var(--accent-orange); }
 
         /* --- Footer --- */
@@ -184,25 +197,18 @@
         .footer-logo-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: 4.5rem; line-height: 0.85; letter-spacing: -2px; }
         .contact-link { color: #fff; text-decoration: none; font-size: 1.8rem; font-family: 'Cormorant Garamond', serif; display: block; margin-bottom: 0.8rem; transition: opacity 0.3s ease; }
 
-        /* --- Mobile Hub (Vertical Alignment Fixes) --- */
+        /* --- Mobile Hub --- */
         @media (max-width: 768px) {
-            #header, .modal-header { 
-                width: 94%; 
-                padding: 0 1.2rem; /* Vertical padding removed to rely on fixed height */
-                height: 60px; /* Fixed height for absolute alignment control */
-                top: calc(env(safe-area-inset-top, 0px) + 15px); 
-            }
-            #header h1 a { font-size: 0.9rem; }
-            nav a { margin-left: 1.2rem; font-size: 0.65rem; }
-
+            #header, .modal-header { width: 94%; height: 60px; padding: 0 1.5rem; top: calc(env(safe-area-inset-top, 0px) + 15px); }
+            #header h1 a { font-size: 0.85rem; }
+            nav a { margin-left: 1.2rem; font-size: 0.6rem; }
             #main { grid-template-columns: 1fr; padding-top: 100px; }
             .thumb { padding: 2.5rem 1.5rem; } 
-            
             .modal-hero-container { height: 60dvh; padding: 15px; }
             .modal-main-img { width: calc(100% - 30px); height: calc(100% - 30px); top: 15px; left: 15px; }
             .lower-left-meta { grid-template-columns: 1fr; gap: 20px; }
-            .footer-grid { grid-template-columns: 1fr; }
-            .agency-close-btn { width: 100%; max-width: 400px; }
+            .modal-controls { flex-direction: column; gap: 3rem; align-items: flex-start; }
+            .agency-close-btn { width: 100%; }
         }
     </style>
 </head>
@@ -217,71 +223,7 @@
     </header>
 
     <div id="main">
-        <article class="thumb" onclick="openProject('Brand Strategy.', 'Corporate ID', 'images/thumbs/00.jpg', 'images/hero/00.jpg', 'Official brand identity system engineered for Koffee Kart.', 'VECTOR', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/00.jpg" alt="Koffee Kart"></div>
-            <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Logo</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'images/hero/07.gif', 'High-fidelity motion design and visual effects created for luxury branding.', '1080 x 1080', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel"></div>
-            <div class="thumb-info"><h2>SkinCartel</h2><p>Motion • 2025</p></div>
-        </article>
-        
-        <article class="thumb" onclick="openProject('Visual Expertise.', 'Digital Precision', 'images/thumbs/md.jpg', 'images/hero/md.jpg', 'Modern digital aesthetics engineered for Madeleine Bettridge.', '1600 x 1200', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/md.jpg" alt="Interior Design"></div>
-            <div class="thumb-info"><h2>Madeleine Bettridge</h2><p>Website • 2026</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'images/hero/02.jpg', 'Creative direction and full-scale photography photoshoot execution.', '3000 x 2000', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine Torcher"></div>
-            <div class="thumb-info"><h2>Turbine Torcher</h2><p>Creatives • 2026</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Digital Impact.', 'Creative Direction', 'images/thumbs/01.jpg', 'images/hero/01.jpg', 'High-energy visuals created for a modern fashion campaign.', '1600 x 1200', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/01.jpg" alt="Fashion Banner"></div>
-            <div class="thumb-info"><h2>Fashion Creatives</h2><p>Graphic campaign</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Interface V1.', 'UI Architecture', 'images/thumbs/09.jpg', 'images/hero/09.jpg', 'Original interface architecture for the Jaunter ecosystem.', '1440 x 900', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/09.jpg" alt="Jaunter System"></div>
-            <div class="thumb-info"><h2>Jaunter System</h2><p>UI • UX Architecture</p></div>
-        </article>
-        
-        <article class="thumb" onclick="openProject('High-Energy Iteration.', 'Interface Dynamics', 'images/thumbs/13.gif', 'images/hero/13.gif', 'Dynamic interface design created for the Jaunter Q3 campaign.', '1080 x 1350', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/13.gif" alt="Jaunter V3"></div>
-            <div class="thumb-info"><h2>Jaunter V3</h2><p>Dynamic Interface</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Web Architecture.', 'Full Development', 'images/thumbs/10.jpg', 'images/hero/10.jpg', 'Technical transformation and development of The Emerald Events Place.', '2560 x 1440', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/10.jpg" alt="Events Place"></div>
-            <div class="thumb-info"><h2>Emerald Events</h2><p>Website Dev • SEO</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Asset Language.', 'UI Design System', 'images/thumbs/04.jpg', 'images/hero/04.jpg', 'Secondary interface assets and icons for luxury branding.', '1920 x 800', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/04.jpg" alt="SkinCartel ID"></div>
-            <div class="thumb-info"><h2>SkinCartel ID</h2><p>UI Assets • Design</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Minimal Layout.', 'Editorial Concept', 'images/thumbs/03.jpg', 'images/hero/03.jpg', 'Minimalist digital editing for the Jaunter Airpods collection.', 'A4 PRINT', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/03.jpg" alt="Jaunter Airpods"></div>
-            <div class="thumb-info"><h2>Jaunter Airpods</h2><p>Editorial Concept</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Product Showcase.', 'Material Design', 'images/thumbs/08.gif', 'images/hero/08.gif', 'Digital asset creation for high-fidelity JN Leather textures.', '1080 x 1080', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/08.gif" alt="JN Leather"></div>
-            <div class="thumb-info"><h2>JN Leather</h2><p>Product • Visuals</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Social Engineering.', 'Campaign Design', 'images/thumbs/06.jpg', 'images/hero/06.jpg', 'Targeted campaign assets for Chef Maria.', '1200 x 628', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/06.jpg" alt="Chef Maria"></div>
-            <div class="thumb-info"><h2>Chef Maria</h2><p>Social • AD</p></div>
-        </article>
-
-        <article class="thumb" onclick="openProject('Vertical Impact.', 'Advertising', 'images/thumbs/05.jpg', 'images/hero/05.jpg', 'Portrait-optimized Pinterest campaign for JHome.', '1080 x 1920', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/05.jpg" alt="JHome Ads"></div>
-            <div class="thumb-info"><h2>JHome Ads</h2><p>Pinterest • Mobile</p></div>
-        </article>
-    </div>
+        </div>
 
     <div id="modal-overlay">
         <div class="modal-header">
@@ -303,7 +245,8 @@
                     <p id="modal-text">---</p>
                 </div>
                 
-                <div class="btn-container">
+                <div class="modal-controls">
+                    <a href="javascript:void(0)" class="next-project-link" onclick="nextProject()">Next Project →</a>
                     <button class="agency-close-btn" onclick="closeProjectHandler()">
                         Close Project <span>✕</span>
                     </button>
@@ -327,28 +270,72 @@
     </footer>
 
     <script>
-        function openProject(title, category, thumbImg, heroImg, text, dim, year) {
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-cat').innerText = category;
-            document.getElementById('modal-img').src = heroImg;
-            document.getElementById('modal-text').innerText = text;
-            document.getElementById('modal-dim').innerText = dim;
-            document.getElementById('modal-year').innerText = year;
+        // THE PROJECT DATA (Engineered Visual Pacing Order)
+        const projects = [
+            { id:0, title: 'Koffee Kart', cat: 'Identity • Logo', thumb: 'images/thumbs/00.jpg', hero: 'images/hero/00.jpg', text: 'Official brand identity system engineered for Koffee Kart.', dim: 'VECTOR', year: '2025' },
+            { id:1, title: 'SkinCartel', cat: 'Motion Graphics • VFX', thumb: 'images/thumbs/07.gif', hero: 'images/hero/07.gif', text: 'High-fidelity motion design and visual effects created for luxury branding.', dim: '1080 x 1080', year: '2025' },
+            { id:2, title: 'Madeleine Bettridge', cat: 'Agency Website • 2026', thumb: 'images/thumbs/md.jpg', hero: 'images/hero/md.jpg', text: 'Modern digital aesthetics engineered for a premium Interior Design agency.', dim: '1600 x 1200', year: '2026' },
+            { id:3, title: 'Turbine Torcher', cat: 'Photography campaign', thumb: 'images/thumbs/02.jpg', hero: 'images/hero/02.jpg', text: 'Creative direction and full-scale photography photoshoot execution.', dim: '3000 x 2000', year: '2026' },
+            { id:4, title: 'Fashion Creatives', cat: 'Graphic campaign', thumb: 'images/thumbs/01.jpg', hero: 'images/hero/01.jpg', text: 'High-energy visuals created for a modern fashion banner campaign.', dim: '1600 x 1200', year: '2026' },
+            { id:5, title: 'Jaunter System', cat: 'UI • UX Architecture', thumb: 'images/thumbs/09.jpg', hero: 'images/hero/09.jpg', text: 'Original interface architecture for the Jaunter ecosystem.', dim: '1440 x 900', year: '2025' },
+            { id:6, title: 'Jaunter V3', cat: 'Dynamic Interface', thumb: 'images/thumbs/13.gif', hero: 'images/hero/13.gif', text: 'Dynamic interface design created for the Jaunter Q3 social campaign.', dim: '1080 x 1350', year: '2026' },
+            { id:7, title: 'Emerald Events', cat: 'Web Dev • SEO', thumb: 'images/thumbs/10.jpg', hero: 'images/hero/10.jpg', text: 'Technical transformation and development of The Emerald Events Place.', dim: '2560 x 1440', year: '2026' },
+            { id:8, title: 'SkinCartel ID', cat: 'UI Assets • Design', thumb: 'images/thumbs/04.jpg', hero: 'images/hero/04.jpg', text: 'Secondary interface assets and icons for consistent luxury branding.', dim: '1920 x 800', year: '2025' },
+            { id:9, title: 'Jaunter Airpods', cat: 'Editorial Concept', thumb: 'images/thumbs/03.jpg', hero: 'images/hero/03.jpg', text: 'Minimalist digital editing for the Jaunter Airpods collection.', dim: 'A4 PRINT', year: '2025' },
+            { id:10, title: 'JN Leather', cat: 'Product • Visuals', thumb: 'images/thumbs/08.gif', hero: 'images/hero/08.gif', text: 'Digital asset creation for high-fidelity JN Leather textures.', dim: '1080 x 1080', year: '2025' },
+            { id:11, title: 'Chef Maria', cat: 'Social • AD', thumb: 'images/thumbs/06.jpg', hero: 'images/hero/06.jpg', text: 'Targeted campaign assets for Chef Maria.', dim: '1200 x 628', year: '2025' },
+            { id:12, title: 'JHome Ads', cat: 'Pinterest • Mobile', thumb: 'images/thumbs/05.jpg', hero: 'images/hero/05.jpg', text: 'Portrait-optimized Pinterest campaign for JHome.', dim: '1080 x 1920', year: '2025' }
+        ];
+
+        let currentIdx = 0;
+
+        // Render Grid On Load
+        const main = document.getElementById('main');
+        projects.forEach((p, idx) => {
+            const article = document.createElement('article');
+            article.className = 'thumb';
+            article.onclick = () => openProject(idx);
+            article.innerHTML = `
+                <div class="image-wrap"><img src="${p.thumb}" loading="lazy"></div>
+                <div class="thumb-info"><h2>${p.title}</h2><p>${p.cat}</p></div>
+            `;
+            main.appendChild(article);
+        });
+
+        // Modal Logic
+        function openProject(idx) {
+            currentIdx = idx;
+            const p = projects[idx];
+            
+            document.getElementById('modal-title').innerText = p.title;
+            document.getElementById('modal-cat').innerText = p.cat;
+            document.getElementById('modal-img').src = p.hero;
+            document.getElementById('modal-text').innerText = p.text;
+            document.getElementById('modal-dim').innerText = p.dim;
+            document.getElementById('modal-year').innerText = p.year;
             
             const overlay = document.getElementById('modal-overlay');
             overlay.style.display = 'flex';
             document.body.classList.add('modal-open');
             overlay.scrollTop = 0;
             
-            history.pushState({ modalOpen: true }, '', '#project');
+            if (window.location.hash !== '#project') {
+                history.pushState({ modalOpen: true }, '', '#project');
+            }
+            
             void overlay.offsetWidth; 
             overlay.classList.add('is-visible');
+        }
+
+        function nextProject() {
+            let nextIdx = (currentIdx + 1) % projects.length;
+            // Immediate transition for cinematic feel
+            openProject(nextIdx);
         }
 
         function triggerCloseAnimation() {
             const overlay = document.getElementById('modal-overlay');
             if (!overlay.classList.contains('is-visible')) return; 
-            
             overlay.classList.remove('is-visible');
             setTimeout(() => {
                 overlay.style.display = 'none';
@@ -358,22 +345,11 @@
 
         function closeProjectHandler() {
             triggerCloseAnimation();
-            if (window.location.hash === '#project') {
-                history.back(); 
-            }
+            if (window.location.hash === '#project') history.back();
         }
 
-        window.addEventListener('popstate', (e) => {
-            if (document.body.classList.contains('modal-open')) {
-                triggerCloseAnimation();
-            }
-        });
-
-        window.addEventListener('keydown', (e) => { 
-            if(e.key === 'Escape' && document.body.classList.contains('modal-open')) {
-                closeProjectHandler();
-            } 
-        });
+        window.addEventListener('popstate', (e) => { if (document.body.classList.contains('modal-open')) triggerCloseAnimation(); });
+        window.addEventListener('keydown', (e) => { if(e.key === 'Escape' && document.body.classList.contains('modal-open')) closeProjectHandler(); });
 
         let lastScrollTop = 0;
         window.addEventListener('scroll', () => {
