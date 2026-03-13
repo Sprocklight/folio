@@ -63,24 +63,24 @@
         }
 
         .logo {
-            text-decoration: none; 
-            color: var(--text-main);
-            font-weight: 800; 
-            font-size: 0.75rem; 
-            text-transform: uppercase; 
-            letter-spacing: 3px;
-            display: inline-flex;
-            align-items: center;
-            line-height: 1;
-        }
+    display: inline-flex;
+    align-items: baseline; /* This anchors the square to the BOTTOM of the text */
+    text-decoration: none;
+    font-weight: 900; /* Use the heaviest weight you have */
+    letter-spacing: -0.05em; /* This is the "Agency" secret—crush the spacing */
+    color: #001A70;
+    line-height: 1;
+    font-size: 1.1rem;
+}
 
-        .logo span { 
-            color: var(--accent-orange); 
-            margin-left: 4px; 
-            font-size: 0.7rem; 
-            display: inline-block;
-            line-height: 1;
-        }
+.logo span {
+    display: inline-block;
+    background-color: #FF4500;
+    width: 0.8em; /* Sets size relative to text height */
+    height: 0.8em;
+    margin-left: 0.25em; /* This is the mathematical "Half-Gap" */
+    flex-shrink: 0;
+}
 
         nav { 
             display: flex; 
@@ -358,3 +358,4 @@
     </script>
 </body>
 </html>
+
