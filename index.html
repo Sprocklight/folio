@@ -8,7 +8,7 @@
     <link rel="icon" type="image/jpg" href="images/favicon.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -40,8 +40,7 @@
         /* --- Aligned Wide Pill Home Header --- */
         #header {
             position: fixed;
-            /* THE FIX: Guarantees 30px of floating space on desktop */
-            top: calc(env(safe-area-inset-top, 0px) + 30px); 
+            top: calc(env(safe-area-inset-top, 0px) + 30px);
             left: 2%; right: 2%; width: 96%;
             z-index: 1000;
             padding: 1.2rem 3rem; 
@@ -54,6 +53,11 @@
             display: flex; 
             justify-content: space-between; 
             align-items: center; 
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        #header.hidden {
+            transform: translateY(calc(-100% - 50px));
         }
 
         #header h1 { 
@@ -63,31 +67,28 @@
             line-height: 1; 
         }
 
-         .logo {
-            font-family: 'Inter', sans-serif; /* Make sure this is loading! */
-            font-weight: 800; /* Dropped from 900 to get that clean look */
+        /* --- THE LOGO LOCK-UP --- */
+        .logo {
+            font-family: 'Inter', sans-serif; 
+            font-weight: 700; 
             display: inline-flex;
             align-items: center; 
             text-decoration: none;
-            color: #001A70;
+            color: var(--text-main);
             font-size: 1.1rem; 
             text-transform: uppercase; 
-    
-             /* Eased this up so it matches the Canva spacing */
             letter-spacing: -0.02em; 
             line-height: 1; 
-         }
+        }
 
         .logo span {
             display: inline-block;
-            background-color: #FF4500; 
+            background-color: var(--accent-orange); 
             width: 0.35em; 
             height: 0.35em; 
-            margin-left: 0.2em; /* Slight adjustment for the new font weight */
+            margin-left: 0.2em; 
             flex-shrink: 0;
-    
-            /* The Joystick: Keeps it planted firmly on the baseline */
-            transform: translateY(0.18em);
+            transform: translateY(0.08em);
         }
 
         nav { 
@@ -111,7 +112,7 @@
         /* --- Aligned Modal Header --- */
         .modal-header {
             position: fixed;
-            top: calc(env(safe-area-inset-top, 0px) + 20px);
+            top: calc(env(safe-area-inset-top, 0px) + 30px);
             left: 50%; transform: translateX(-50%);
             width: 85%; max-width: 1000px;
             z-index: 10005;
@@ -160,16 +161,21 @@
         .thumb-info h2 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: var(--text-main); }
         .thumb-info p { font-size: 0.6rem; color: #aaa; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; }
 
-        /* --- Modal Hero (Framed Style) --- */
+        /* --- Modal Hero (Cinematic Settle & Drift) --- */
         #modal-overlay {
             position: fixed; inset: 0; width: 100%; height: 100dvh; 
             z-index: 9999; background: #ffffff; display: none;
+            opacity: 0; 
             flex-direction: column; overflow-y: auto; -webkit-overflow-scrolling: touch;
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        
+        #modal-overlay.is-visible { opacity: 1; }
 
         .modal-hero-container { 
             width: 100%; height: 80dvh; position: relative;
             background: #f8f8f8; padding: 25px; 
+            overflow: hidden; 
         }
 
         .modal-main-img { 
@@ -178,15 +184,29 @@
             object-fit: cover; display: block;
             border-radius: 12px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.04);
+            transform: scale(1.04);
+            opacity: 0;
+            transition: transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease;
+        }
+        
+        #modal-overlay.is-visible .modal-main-img {
+            transform: scale(1);
+            opacity: 1;
         }
 
         /* --- Content Area --- */
         .modal-content-area { 
             width: 100%; max-width: 1100px; margin: 0 auto; padding: 4rem 5% 10rem;
-            opacity: 0; transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+            opacity: 0; 
+            transform: translateY(20px); 
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition-delay: 0.1s; 
         }
-        .modal-content-area.animate-in { opacity: 1; transform: translateY(0); }@
+        
+        #modal-overlay.is-visible .modal-content-area { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
 
         .lower-left-meta {
             display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
@@ -213,7 +233,7 @@
 
         /* --- Mobile Hub --- */
         @media (max-width: 768px) {
-            #header, .modal-header { width: 94%; padding: 0.8rem 1.2rem; top: 15px; }
+            #header, .modal-header { width: 94%; padding: 0.8rem 1.2rem; top: calc(env(safe-area-inset-top, 0px) + 15px); }
             #header h1 a { font-size: 0.7rem; }
             nav a { margin-left: 1rem; font-size: 0.55rem; }
 
@@ -239,67 +259,67 @@
 
     <div id="main">
         <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/md.jpg', 'images/hero/md.jpg', 'Modern aesthetics for a premium Interior Design agency.', '1600 x 1200', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/md.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/md.jpg" alt="Interior Design"></div>
             <div class="thumb-info"><h2>Interior Design Website</h2><p>Website • 2026</p></div>
         </article>
         
         <article class="thumb" onclick="openProject('Visual Expertise.', 'Design Strategy', 'images/thumbs/01.jpg', 'images/hero/01.jpg', 'High-energy creatives for a modern fashion banner.', '1600 x 1200', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/01.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/01.jpg" alt="Fashion Banner"></div>
             <div class="thumb-info"><h2>Fashion Website Banner</h2><p>Creatives • 2026</p></div>
         </article>
         
         <article class="thumb" onclick="openProject('Motion Clarity.', 'Visual Effects', 'images/thumbs/07.gif', 'images/hero/07.gif', 'High-fidelity motion design created for luxury branding.', '1080 x 1080', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/07.gif"></div>
+            <div class="image-wrap"><img src="images/thumbs/07.gif" alt="SkinCartel Motion"></div>
             <div class="thumb-info"><h2>SkinCartel</h2><p>Motion • 2025</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Production Quality.', 'Photography', 'images/thumbs/02.jpg', 'images/hero/02.jpg', 'Creative direction and full-scale photoshoot execution.', '3000 x 2000', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/02.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/02.jpg" alt="Turbine Torcher"></div>
             <div class="thumb-info"><h2>Turbine Torcher</h2><p>Creatives • 2026</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Minimal Layout.', 'Editorial Design', 'images/thumbs/03.jpg', 'images/hero/03.jpg', 'Digital editing for the Jaunter Airpods collection.', 'A4 PRINT', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/03.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/03.jpg" alt="Jaunter Collection"></div>
             <div class="thumb-info"><h2>Jaunter Collection</h2><p>Editorial • 2025</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Web Architecture.', 'Full Development', 'images/thumbs/10.jpg', 'images/hero/10.jpg', 'Digital transformation of The Emerald Events Place.', '2560 x 1440', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/10.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/10.jpg" alt="Events Place"></div>
             <div class="thumb-info"><h2>Events Place Website</h2><p>Website Dev • SEO</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Social Engineering.', 'Campaign Design', 'images/thumbs/06.jpg', 'images/hero/06.jpg', 'Targeted campaign assets for Chef Maria.', '1200 x 628', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/06.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/06.jpg" alt="Chef Maria"></div>
             <div class="thumb-info"><h2>Chef Maria</h2><p>Social • AD</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Material Showcase.', 'Product Design', 'images/thumbs/08.gif', 'images/hero/08.gif', 'Digital asset creation for JN Leather textures.', '1080 x 1080', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/08.gif"></div>
+            <div class="image-wrap"><img src="images/thumbs/08.gif" alt="JN Leather"></div>
             <div class="thumb-info"><h2>JN Leather</h2><p>Product • Visuals</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Interface V1.', 'UI Architecture', 'images/thumbs/09.jpg', 'images/hero/09.jpg', 'Original architecture for the Jaunter ecosystem.', '1440 x 900', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/09.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/09.jpg" alt="Jaunter V1"></div>
             <div class="thumb-info"><h2>Jaunter V1</h2><p>UI • UX</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Vertical Impact.', 'Advertising', 'images/thumbs/05.jpg', 'images/hero/05.jpg', 'Portrait-optimized Pinterest campaign for JHome.', '1080 x 1920', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/05.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/05.jpg" alt="JHome Ads"></div>
             <div class="thumb-info"><h2>JHome Ads</h2><p>Pinterest • Mobile</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Corporate ID.', 'Brand Identity', 'images/thumbs/00.jpg', 'images/hero/00.jpg', 'Official brand system for Koffee Kart.', 'VECTOR', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/00.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/00.jpg" alt="Koffee Kart"></div>
             <div class="thumb-info"><h2>Koffee Kart</h2><p>Identity • Logo</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Future Iteration.', 'Interface Design', 'images/thumbs/13.gif', 'images/hero/13.gif', 'High-energy social campaign for Jaunter Q3.', '1080 x 1350', '2026')">
-            <div class="image-wrap"><img src="images/thumbs/13.gif"></div>
+            <div class="image-wrap"><img src="images/thumbs/13.gif" alt="Jaunter V3"></div>
             <div class="thumb-info"><h2>Jaunter V3</h2><p>Motion • Q3</p></div>
         </article>
 
         <article class="thumb" onclick="openProject('Visual Language.', 'Brand Assets', 'images/thumbs/04.jpg', 'images/hero/04.jpg', 'Secondary interface assets for consistent branding.', '1920 x 800', '2025')">
-            <div class="image-wrap"><img src="images/thumbs/04.jpg"></div>
+            <div class="image-wrap"><img src="images/thumbs/04.jpg" alt="SkinCartel ID"></div>
             <div class="thumb-info"><h2>SkinCartel ID</h2><p>Assets • Digital</p></div>
         </article>
     </div>
@@ -311,7 +331,7 @@
         </div>
         <div class="modal-body">
             <div class="modal-hero-container">
-                <img src="" id="modal-img" class="modal-main-img">
+                <img src="" id="modal-img" class="modal-main-img" alt="Project Hero">
             </div>
             <div id="modal-content" class="modal-content-area">
                 <div class="lower-left-meta">
@@ -348,29 +368,50 @@
             document.getElementById('modal-text').innerText = text;
             document.getElementById('modal-dim').innerText = dim;
             document.getElementById('modal-year').innerText = year;
-            document.getElementById('modal-overlay').style.display = 'flex';
+            
+            const overlay = document.getElementById('modal-overlay');
+            overlay.style.display = 'flex';
             document.body.classList.add('modal-open');
-            document.getElementById('modal-overlay').scrollTop = 0;
-            setTimeout(() => { document.getElementById('modal-content').classList.add('animate-in'); }, 50);
+            overlay.scrollTop = 0;
+            
+            // Forces the browser to recognize the display change before animating
+            void overlay.offsetWidth; 
+            
+            // Triggers the CSS settle/drift transitions
+            overlay.classList.add('is-visible');
         }
 
         function closeProject() {
-            document.getElementById('modal-content').classList.remove('animate-in');
+            const overlay = document.getElementById('modal-overlay');
+            
+            // Starts the fade out
+            overlay.classList.remove('is-visible');
+            
+            // Waits exactly 500ms before removing from layout
             setTimeout(() => {
-                document.getElementById('modal-overlay').style.display = 'none';
+                overlay.style.display = 'none';
                 document.body.classList.remove('modal-open');
-            }, 400);
+            }, 500);
         }
 
         window.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeProject(); });
+
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', () => {
+            if (document.body.classList.contains('modal-open')) return;
+
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 50) {
+                header.classList.add('hidden');
+            } else if (scrollTop < lastScrollTop) {
+                header.classList.remove('hidden');
+            }
+            
+            lastScrollTop = scrollTop;
+        });
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
